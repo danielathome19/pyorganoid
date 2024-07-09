@@ -1,0 +1,70 @@
+name: CI/CT/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest
+
+    - name: Run unit tests
+      run: |
+        pytest tests
+
+    - name: Build PyPI package
+      if: success()
+      run: |
+        python setup.py sdist bdist_wheel
+
+    - name: Publish to PyPI
+      if: success()
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        pip install twine
+        twine upload dist/*
+
+    - name: Install Conda
+      if: success()
+      uses: goanpeca/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        miniforge-variant: Mambaforge
+        python-version: 3.8
+
+    - name: Build Conda package
+      if: success()
+      run: |
+        conda install conda-build anaconda-client
+        conda config --set anaconda_upload no
+        conda-build . --output-folder build_output
+
+    - name: Publish to Conda
+      if: success()
+      env:
+        ANACONDA_USER: ${{ secrets.CONDA_USERNAME }}
+        ANACONDA_PASSWORD: ${{ secrets.CONDA_PASSWORD }}
+      run: |
+        anaconda login --username $ANACONDA_USER --password $ANACONDA_PASSWORD
+        anaconda upload build_output/**/pyorganoid-*.tar.bz2 --force

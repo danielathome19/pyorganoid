@@ -1,0 +1,9 @@
+**/desktop.ini
+**/Thumbs.db
+**/.DS_Store
+
+/venv/
+
+# Ignore all files in the test folder except .py files
+tests/*
+!tests/*.py

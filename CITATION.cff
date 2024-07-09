@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Szelogowski"
+  given-names: "Daniel"
+  orcid: "https://orcid.org/0000-0002-0350-5771"
+title: "pyorganoid: A Python package for the simulation of Organoid Intelligence (OI)/Organoid Learning (OL)."
+type: software
+version: 1.0.0
+doi: TBA
+license: BSD-3-Clause
+license-url: "https://github.com/danielathome19/pyorganoid/blob/master/LICENSE"
+date-released: 2022-07-06
+url: "https://github.com/danielathome19/pyorganoid"
