@@ -37,7 +37,7 @@ Pyorganoid is currently in development and may not yet be ready for production u
 to help us improve the package and expand its capabilities. If you are interested in contributing, please see our
 [contributing guide](CONTRIBUTING.md).
 
-<p style="font-size: 6px">*As of July 6th, 2024, to the best of our ability :)</p>
+<p style="font-size: 6px">*As of July 6th, 2024, to the best of our knowledge :)</p>
 
 
 ## Installation
