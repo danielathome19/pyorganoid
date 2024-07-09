@@ -3,6 +3,7 @@
 **/.DS_Store
 
 /venv/
+/.idea/
 
 # Ignore all files in the test folder except .py files
 tests/*
