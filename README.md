@@ -13,8 +13,9 @@ https://anaconda.org/conda-forge/pyorganoid)
 https://DOI_LINK_HERE)-->
 
 
-Pyorganoid is a Python package for the simulation of organoids for the purpose of studying Organoid Intelligence (OI)
-and Organoid Learning (OL). It is designed to be simple to use and easy to extend with support for standard machine
+Pyorganoid is the world's first<sup>*</sup> Python package for the simulation of organoids for the purpose of studying 
+Organoid Intelligence (OI) and Organoid Learning (OL).
+It is designed to be simple to use and easy to extend with support for standard machine
 learning libraries such as TensorFlow, PyTorch, and Scikit-Learn.
 
 - **Website:** https://danielathome19.github.io/pyorganoid/
@@ -35,6 +36,8 @@ It provides:
 Pyorganoid is currently in development and may not yet be ready for production use. We are actively seeking contributors
 to help us improve the package and expand its capabilities. If you are interested in contributing, please see our
 [contributing guide](CONTRIBUTING.md).
+
+<p style="font-size: 6px">*As of July 6th, 2024, to the best of our ability :)</p>
 
 ## Installation
 
