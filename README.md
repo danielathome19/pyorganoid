@@ -39,7 +39,11 @@ to help us improve the package and expand its capabilities. If you are intereste
 
 <p style="font-size: 6px">*As of July 6th, 2024, to the best of our ability :)</p>
 
+
 ## Installation
+
+
+### Pip
 
 Pyorganoid can be installed (without built-in support for machine learning libraries) using `pip`:
 
@@ -61,11 +65,36 @@ pip install pyorganoid[torch]
 pip install pyorganoid[sklearn]
 ```
 
+
+### Conda
+
+Pyorganoid can also be installed using `conda`:
+
+```bash
+conda install -c conda-forge pyorganoid
+```
+
+To include support for all machine learning libraries, use:
+
+```bash
+conda install -c conda-forge pyorganoid-all
+```
+
+Or, to include support for a specific library (TensorFlow, PyTorch, or Scikit-Learn), use:
+
+```bash
+conda install -c conda-forge pyorganoid-tensorflow
+conda install -c conda-forge pyorganoid-torch
+conda install -c conda-forge pyorganoid-sklearn
+```
+
+
 ## Quickstart
 
 For a quick introduction to Pyorganoid, see the [Spiking Nueron Test](tests/spiking_test.py) in the `test` directory.
 This test demonstrates the creation of a simple spiking neuron organoid running a binary classification Multi-Layer
 Perceptron (MLP) model using TensorFlow.
+
 
 ## License
 
