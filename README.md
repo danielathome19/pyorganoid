@@ -98,7 +98,7 @@ This test demonstrates the creation of a simple spiking neuron organoid running 
 Perceptron (MLP) model using TensorFlow.
 
 If you prefer Scikit-Learn or PyTorch, see the [Volumetric Organoid Test (Scikit-Learn)](tests/growshrink_test.py) or
-the [XYZ Organoid Test (PyTorch)](tests/XYZ_test.py), respectively.
+the [Gene Regulation Organoid Test (PyTorch)](tests/generegulation_test.py), respectively.
 
 
 <table style="width:100%;">
