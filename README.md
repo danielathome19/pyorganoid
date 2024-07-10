@@ -19,7 +19,7 @@ It is designed to be simple to use and easy to extend with support for standard 
 learning libraries such as TensorFlow, PyTorch, and Scikit-Learn.
 
 - **Website:** https://danielathome19.github.io/pyorganoid/
-- **Documentation:** https://danielathome19.github.io/pyorganoid/doc/
+- **Documentation:** https://danielathome19.github.io/pyorganoid/docs/
 - **Source code:** https://github.com/danielathome19/pyorganoid
 - **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Bug reports:** https://github.com/danielathome19/pyorganoid/issues
