@@ -70,6 +70,20 @@ pytest tests
 
 Ensure that all tests pass before submitting a pull request.
 
+
+### Building the Documentation
+
+To build the documentation, use the following commands:
+```sh
+sphinx-apidoc -o docs/ pyorganoid/
+mv docs/modules.rst docs/source
+mv docs/pyorganoid.rst docs/source
+cd docs
+make clean
+make html
+```
+
+
 ## Pull Request Process
 
 1. Ensure your code follows the style guide.

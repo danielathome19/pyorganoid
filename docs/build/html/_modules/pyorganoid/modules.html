@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyorganoid.modules &mdash; PyOrganoid 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PyOrganoid
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">pyorganoid</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PyOrganoid</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyorganoid.modules</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyorganoid.modules</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="BaseModule">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.BaseModule">[docs]</a>
+<span class="k">class</span> <span class="nc">BaseModule</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for all modules (not to be instantiated directly).</span>
+<span class="sd">    Modules are used to implement the logic of the agents in the simulation.</span>
+<span class="sd">    Subclasses should implement the run method.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    run(agent)</span>
+<span class="sd">        Run the module on the given agent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="BaseModule.run">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.BaseModule.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run the module on the given agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to run the module on.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Subclasses should implement this method!&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="BaseMLModule">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.BaseMLModule">[docs]</a>
+<span class="k">class</span> <span class="nc">BaseMLModule</span><span class="p">(</span><span class="n">BaseModule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for machine learning modules (not to be instantiated directly).</span>
+<span class="sd">    Subclasses should implement the collect_input_data (optionally) and apply_prediction methods.</span>
+<span class="sd">    It is a subclass of the BaseModule class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    run(agent, verbose=False)</span>
+<span class="sd">        Run the module on the given agent.</span>
+<span class="sd">    collect_input_data(agent)</span>
+<span class="sd">        Collect the input data for the machine learning model.</span>
+<span class="sd">    apply_prediction(agent, prediction)</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ml_model</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ml_model</span> <span class="o">=</span> <span class="n">ml_model</span>
+
+<div class="viewcode-block" id="BaseMLModule.run">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.BaseMLModule.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run the module on the given agent. Collects input data, makes a prediction, and applies it to the agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to run the module on.</span>
+<span class="sd">        verbose : bool, optional</span>
+<span class="sd">            Whether to print verbose output. Default is False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">input_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collect_input_data</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ml_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apply_prediction</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BaseMLModule.collect_input_data">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.BaseMLModule.collect_input_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collect the input data for the machine learning model.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to collect input data from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array-like</span>
+<span class="sd">            The input data for the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">position</span><span class="p">]</span>  <span class="c1"># Default implementation, can be overridden</span></div>
+
+
+<div class="viewcode-block" id="BaseMLModule.apply_prediction">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.BaseMLModule.apply_prediction">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to apply the prediction to.</span>
+<span class="sd">        prediction : array-like</span>
+<span class="sd">            The prediction output of the machine learning model.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        NotImplementedError</span>
+<span class="sd">            If the subclass does not implement this method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Subclasses should implement this method!&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BaseMLModule.drop_prediction_dimensionality">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.BaseMLModule.drop_prediction_dimensionality">[docs]</a>
+    <span class="k">def</span> <span class="nf">drop_prediction_dimensionality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Drop the dimensionality of the prediction if necessary (i.e., from Tensorflow models).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        prediction : array-like</span>
+<span class="sd">            The prediction output of the machine learning model.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array-like</span>
+<span class="sd">            The prediction output with reduced dimensionality.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.tf_module</span> <span class="kn">import</span> <span class="n">TFModel</span>
+            <span class="k">return</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ml_model</span><span class="p">,</span> <span class="n">TFModel</span><span class="p">)</span> <span class="k">else</span> <span class="n">prediction</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">prediction</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SpikingNeuronModule">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.SpikingNeuronModule">[docs]</a>
+<span class="k">class</span> <span class="nc">SpikingNeuronModule</span><span class="p">(</span><span class="n">BaseMLModule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Module for simulating a spiking neuron using a machine learning model.</span>
+<span class="sd">    The module collects the membrane potential of the agent as input and</span>
+<span class="sd">    applies the prediction to the membrane potential.</span>
+<span class="sd">    It is a subclass of the BaseMLModule class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    run(agent, verbose=False)</span>
+<span class="sd">        Run the module on the given agent.</span>
+<span class="sd">    collect_input_data(agent)</span>
+<span class="sd">        Collect the input data for the machine learning model.</span>
+<span class="sd">    apply_prediction(agent, prediction)</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SpikingNeuronModule.collect_input_data">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.SpikingNeuronModule.collect_input_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collect the input data for the machine learning model. In this case, the membrane potential of the agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to collect input data from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array-like</span>
+<span class="sd">            The input data for the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">get_input_data</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="SpikingNeuronModule.apply_prediction">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.SpikingNeuronModule.apply_prediction">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">        Adds the prediction to the membrane potential of the agent (neuron).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to apply the prediction to.</span>
+<span class="sd">        prediction : array-like</span>
+<span class="sd">            The prediction output of the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_prediction_dimensionality</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">+=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="GrowthShrinkageModule">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule">[docs]</a>
+<span class="k">class</span> <span class="nc">GrowthShrinkageModule</span><span class="p">(</span><span class="n">BaseMLModule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Module for simulating growth and shrinkage of cells using a machine learning model.</span>
+<span class="sd">    The module collects the volume of the agent as input and applies the prediction to the volume.</span>
+<span class="sd">    It is a subclass of the BaseMLModule class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+<span class="sd">    growth_amount : float, optional</span>
+<span class="sd">        The amount by which the cells grow at each time step. Default is 0.1.</span>
+<span class="sd">    growth_variance : float, optional</span>
+<span class="sd">        The variance of the growth amount. Default is 0.05.</span>
+<span class="sd">    prediction_threshold : float, optional</span>
+<span class="sd">        The threshold above which the cells grow and below which they shrink. Default is 0.5.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+<span class="sd">    growth_amount : float, optional</span>
+<span class="sd">        The amount by which the cells grow at each time step.</span>
+<span class="sd">    growth_variance : float, optional</span>
+<span class="sd">        The variance of the growth amount.</span>
+<span class="sd">    prediction_threshold : float, optional</span>
+<span class="sd">        The threshold above which the cells grow and below which they shrink.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    run(agent, verbose=False)</span>
+<span class="sd">        Run the module on the given agent.</span>
+<span class="sd">    collect_input_data(agent)</span>
+<span class="sd">        Collect the input data for the machine learning model.</span>
+<span class="sd">    apply_prediction(agent, prediction)</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ml_model</span><span class="p">,</span> <span class="n">growth_amount</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">growth_variance</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">prediction_threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ml_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">growth_amount</span> <span class="o">=</span> <span class="n">growth_amount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">growth_variance</span> <span class="o">=</span> <span class="n">growth_variance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prediction_threshold</span> <span class="o">=</span> <span class="n">prediction_threshold</span>
+
+<div class="viewcode-block" id="GrowthShrinkageModule.collect_input_data">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule.collect_input_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collect the input data for the machine learning model. In this case, the volume of the agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to collect input data from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array-like</span>
+<span class="sd">            The input data for the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">get_volume</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="GrowthShrinkageModule.apply_prediction">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule.apply_prediction">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">        If the prediction is greater than 0.5, the agent (cell) grows; otherwise, it shrinks.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to apply the prediction to.</span>
+<span class="sd">        prediction : array-like</span>
+<span class="sd">            The prediction output of the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_prediction_dimensionality</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
+        <span class="n">change</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">growth_amount</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">growth_variance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">growth_variance</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">grow</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">shrink</span><span class="p">(</span><span class="n">change</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DifferentiationModule">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.DifferentiationModule">[docs]</a>
+<span class="k">class</span> <span class="nc">DifferentiationModule</span><span class="p">(</span><span class="n">BaseMLModule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Module for simulating differentiation of cells (such as in a Neural Network) using a machine learning model.</span>
+<span class="sd">    The module collects the state of the agent as input and applies the prediction to the state.</span>
+<span class="sd">    It is a subclass of the BaseMLModule class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    run(agent, verbose=False)</span>
+<span class="sd">        Run the module on the given agent.</span>
+<span class="sd">    collect_input_data(agent)</span>
+<span class="sd">        Collect the input data for the machine learning model.</span>
+<span class="sd">    apply_prediction(agent, prediction)</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DifferentiationModule.collect_input_data">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.DifferentiationModule.collect_input_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collect the input data for the machine learning model. In this case, the state of the agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to collect input data from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array-like</span>
+<span class="sd">            The input data for the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">get_state</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="DifferentiationModule.apply_prediction">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.DifferentiationModule.apply_prediction">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">        Differentiates the agent (cell) based on the prediction.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to apply the prediction to.</span>
+<span class="sd">        prediction : array-like</span>
+<span class="sd">            The prediction output of the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_prediction_dimensionality</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">differentiate</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ChemotaxisModule">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.ChemotaxisModule">[docs]</a>
+<span class="k">class</span> <span class="nc">ChemotaxisModule</span><span class="p">(</span><span class="n">BaseMLModule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Module for simulating chemotaxis of cells using a machine learning model.</span>
+<span class="sd">    The module collects the chemotactic gradient of the agent as input and applies the prediction to the gradient.</span>
+<span class="sd">    It is a subclass of the BaseMLModule class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    run(agent, verbose=False)</span>
+<span class="sd">        Run the module on the given agent.</span>
+<span class="sd">    collect_input_data(agent)</span>
+<span class="sd">        Collect the input data for the machine learning model.</span>
+<span class="sd">    apply_prediction(agent, prediction)</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ChemotaxisModule.collect_input_data">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.ChemotaxisModule.collect_input_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collect the input data for the machine learning model. In this case, the chemotactic gradient of the agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to collect input data from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array-like</span>
+<span class="sd">            The input data for the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">get_chemotactic_gradient</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="ChemotaxisModule.apply_prediction">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.ChemotaxisModule.apply_prediction">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">        Moves the agent (cell) towards the predicted gradient.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to apply the prediction to.</span>
+<span class="sd">        prediction : array-like</span>
+<span class="sd">            The prediction output of the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_prediction_dimensionality</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">move_towards_gradient</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ImmuneResponseModule">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.ImmuneResponseModule">[docs]</a>
+<span class="k">class</span> <span class="nc">ImmuneResponseModule</span><span class="p">(</span><span class="n">BaseMLModule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Module for simulating an immune response using a machine learning model.</span>
+<span class="sd">    The module collects whether the agent is active or not as input and applies the prediction to the agent.</span>
+<span class="sd">    It is a subclass of the BaseMLModule class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    run(agent, verbose=False)</span>
+<span class="sd">        Run the module on the given agent.</span>
+<span class="sd">    collect_input_data(agent)</span>
+<span class="sd">        Collect the input data for the machine learning model.</span>
+<span class="sd">    apply_prediction(agent, prediction)</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ImmuneResponseModule.collect_input_data">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.ImmuneResponseModule.collect_input_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collect the input data for the machine learning model. In this case, whether the agent is active or not.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to collect input data from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array-like</span>
+<span class="sd">            The input data for the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">is_active</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="ImmuneResponseModule.apply_prediction">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.ImmuneResponseModule.apply_prediction">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">        Activates or deactivates the agent based on the prediction.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to apply the prediction to.</span>
+<span class="sd">        prediction : array-like</span>
+<span class="sd">            The prediction output of the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_prediction_dimensionality</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">deactivate</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SynapticPlasticityModule">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.SynapticPlasticityModule">[docs]</a>
+<span class="k">class</span> <span class="nc">SynapticPlasticityModule</span><span class="p">(</span><span class="n">BaseMLModule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Module for simulating spike-timing-dependent plasticity (STDP) in a synapse (e.g., in a physical neural network).</span>
+<span class="sd">    The module updates the synaptic weight based on the pre- and post-synaptic spikes.</span>
+<span class="sd">    It is a subclass of the BaseMLModule class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    synapse : Synapse</span>
+<span class="sd">        The synapse to update.</span>
+<span class="sd">    learning_rate : float, optional</span>
+<span class="sd">        The learning rate for updating the synaptic weight. Default is 0.01.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    synapse : Synapse</span>
+<span class="sd">        The synapse to update.</span>
+<span class="sd">    learning_rate : float</span>
+<span class="sd">        The learning rate for updating the synaptic weight.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    run(agent)</span>
+<span class="sd">        Run the module on the given agent.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">synapse</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span> <span class="o">=</span> <span class="n">synapse</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
+
+<div class="viewcode-block" id="SynapticPlasticityModule.run">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.SynapticPlasticityModule.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+        <span class="n">pre_spike</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">pre_neuron</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">pre_neuron</span><span class="o">.</span><span class="n">threshold</span>
+        <span class="n">post_spike</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">post_neuron</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">post_neuron</span><span class="o">.</span><span class="n">threshold</span>
+
+        <span class="k">if</span> <span class="n">pre_spike</span> <span class="ow">and</span> <span class="n">post_spike</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">weight</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">pre_spike</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">post_spike</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">weight</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">weight</span></div>
+
+
+<div class="viewcode-block" id="SynapticPlasticityModule.collect_input_data">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.SynapticPlasticityModule.collect_input_data">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="n">agent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collect the input data for the machine learning model. In this case, the membrane potential of the agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to collect input data from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array-like</span>
+<span class="sd">            The input data for the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">get_input_data</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="SynapticPlasticityModule.apply_prediction">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.SynapticPlasticityModule.apply_prediction">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">        Adds the prediction to the membrane potential of the agent (neuron).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to apply the prediction to.</span>
+<span class="sd">        prediction : array-like</span>
+<span class="sd">            The prediction output of the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_prediction_dimensionality</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">+=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MetabolicModule">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.MetabolicModule">[docs]</a>
+<span class="k">class</span> <span class="nc">MetabolicModule</span><span class="p">(</span><span class="n">BaseMLModule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Module for simulating metabolism in cells using a machine learning model.</span>
+<span class="sd">    The module collects the energy level of the agent as input and applies the prediction to the agent.</span>
+<span class="sd">    It is a subclass of the BaseMLModule class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    run(agent, verbose=False)</span>
+<span class="sd">        Run the module on the given agent.</span>
+<span class="sd">    collect_input_data(agent)</span>
+<span class="sd">        Collect the input data for the machine learning model.</span>
+<span class="sd">    apply_prediction(agent, prediction)</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MetabolicModule.collect_input_data">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.MetabolicModule.collect_input_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collect the input data for the machine learning model. In this case, the energy level of the agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to collect input data from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array-like</span>
+<span class="sd">            The input data for the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">energy</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="MetabolicModule.apply_prediction">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.MetabolicModule.apply_prediction">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">        Metabolizes the agent based on the prediction.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to apply the prediction to.</span>
+<span class="sd">        prediction : array-like</span>
+<span class="sd">            The prediction output of the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metabolism_factor</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">metabolize</span><span class="p">(</span><span class="n">metabolism_factor</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="GeneRegulationModule">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.GeneRegulationModule">[docs]</a>
+<span class="k">class</span> <span class="nc">GeneRegulationModule</span><span class="p">(</span><span class="n">BaseMLModule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Module for simulating gene regulation in cells using a machine learning model.</span>
+<span class="sd">    The module collects the gene expression level of the agent as input and applies the prediction to the agent.</span>
+<span class="sd">    It is a subclass of the BaseMLModule class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    run(agent, verbose=False)</span>
+<span class="sd">        Run the module on the given agent.</span>
+<span class="sd">    collect_input_data(agent)</span>
+<span class="sd">        Collect the input data for the machine learning model.</span>
+<span class="sd">    apply_prediction(agent, prediction)</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GeneRegulationModule.collect_input_data">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.GeneRegulationModule.collect_input_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collect the input data for the machine learning model. In this case, the gene expression level of the agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to collect input data from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array-like</span>
+<span class="sd">            The input data for the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">gene_expression_level</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="GeneRegulationModule.apply_prediction">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.GeneRegulationModule.apply_prediction">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
+<span class="sd">        Regulates the genes of the agent based on the prediction.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to apply the prediction to.</span>
+<span class="sd">        prediction : array-like</span>
+<span class="sd">            The prediction output of the machine learning model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_prediction_dimensionality</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
+        <span class="n">regulation_factor</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">regulate_genes</span><span class="p">(</span><span class="n">regulation_factor</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Daniel Szelogowski.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

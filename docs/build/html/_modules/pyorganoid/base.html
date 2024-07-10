@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyorganoid.base &mdash; PyOrganoid 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PyOrganoid
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">pyorganoid</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PyOrganoid</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyorganoid.base</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyorganoid.base</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="Agent">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Agent">[docs]</a>
+<span></span><span class="k">class</span> <span class="nc">Agent</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for all agents in the simulation (not to be instantiated directly). It represents a single entity in the</span>
+<span class="sd">    environment and is used as an interface for different types of agents (e.g., cells, molecules).</span>
+<span class="sd">    The agent can have multiple modules that define its behavior.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : tuple</span>
+<span class="sd">        The position of the agent in the environment.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the agent in the environment.</span>
+<span class="sd">    modules : list</span>
+<span class="sd">        List of modules that define the behavior of the agent.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    add_module(module)</span>
+<span class="sd">        Add a module to the agent.</span>
+<span class="sd">    update()</span>
+<span class="sd">        Update the agent&#39;s state based on its modules.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="Agent.add_module">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Agent.add_module">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a module to the agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        module : BaseModule</span>
+<span class="sd">            The module to add to the agent.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Agent.update">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Agent.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the agent&#39;s state based on its modules.</span>
+<span class="sd">        This method should be called at each time step to update the agent&#39;s state based on its modules.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="n">module</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Cell">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Cell">[docs]</a>
+<span class="k">class</span> <span class="nc">Cell</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for all cell agents in the simulation (typically not instantiated directly). It represents a single cell</span>
+<span class="sd">    in the environment and extends the Agent class with additional functionality specific to cells.</span>
+<span class="sd">    It is a subclass of the Agent class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : tuple</span>
+<span class="sd">        The position of the cell in the environment.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell in the environment.</span>
+<span class="sd">    modules : list</span>
+<span class="sd">        List of modules that define the behavior of the cell.</span>
+<span class="sd">    history : list</span>
+<span class="sd">        List of historical values for the cell.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    add_module(module)</span>
+<span class="sd">        Add a module to the cell.</span>
+<span class="sd">    update(historical_value=None)</span>
+<span class="sd">        Update the cell&#39;s state based on its modules and historical value.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="Cell.update">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Cell.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">historical_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the cell&#39;s state based on its modules and historical value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        historical_value : any, optional</span>
+<span class="sd">            The historical value to append to the cell&#39;s history. Default is None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">historical_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">historical_value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cell.get_history">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Cell.get_history">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the historical values of the cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            List of historical values for the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Synapse">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Synapse">[docs]</a>
+<span class="k">class</span> <span class="nc">Synapse</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for synapses connecting neurons in the simulation. It represents a connection between two neurons and</span>
+<span class="sd">    is used to transmit signals between them.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pre_neuron : SpikingNeuronCell</span>
+<span class="sd">        The pre-synaptic neuron.</span>
+<span class="sd">    post_neuron : SpikingNeuronCell</span>
+<span class="sd">        The post-synaptic neuron.</span>
+<span class="sd">    weight : float, optional</span>
+<span class="sd">        The weight of the synapse. Default is 0.5.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pre_neuron : SpikingNeuronCell</span>
+<span class="sd">        The pre-synaptic neuron.</span>
+<span class="sd">    post_neuron : SpikingNeuronCell</span>
+<span class="sd">        The post-synaptic neuron.</span>
+<span class="sd">    weight : float</span>
+<span class="sd">        The weight of the synapse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pre_neuron</span><span class="p">,</span> <span class="n">post_neuron</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pre_neuron</span> <span class="o">=</span> <span class="n">pre_neuron</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">post_neuron</span> <span class="o">=</span> <span class="n">post_neuron</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+
+<div class="viewcode-block" id="Synapse.transmit">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Synapse.transmit">[docs]</a>
+    <span class="k">def</span> <span class="nf">transmit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transmit a signal from the pre-synaptic neuron to the post-synaptic neuron.</span>
+<span class="sd">        This method is called when the pre-synaptic neuron fires an action potential.</span>
+<span class="sd">        The post-synaptic neuron&#39;s membrane potential is increased by the weight of the synapse.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pre_neuron</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pre_neuron</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">post_neuron</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Organoid">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Organoid">[docs]</a>
+<span class="k">class</span> <span class="nc">Organoid</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for all organoids in the simulation (typically not instantiated directly). It represents a collection of</span>
+<span class="sd">    agents in the environment and is used to simulate the behavior of a group of agents.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    environment : Environment</span>
+<span class="sd">        The environment in which the organoid exists.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    environment : Environment</span>
+<span class="sd">        The environment in which the organoid exists.</span>
+<span class="sd">    agents : list</span>
+<span class="sd">        List of agents (e.g., cells) in the organoid.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    add_agent(agent)</span>
+<span class="sd">        Add an agent to the organoid.</span>
+<span class="sd">    get_cells()</span>
+<span class="sd">        Get the list of agents in the organoid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span> <span class="o">=</span> <span class="n">environment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agents</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="Organoid.add_agent">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Organoid.add_agent">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add an agent to the organoid.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            The agent to add to the organoid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Organoid.get_cells">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Organoid.get_cells">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the list of agents in the organoid.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            List of agents (e.g., cells) in the organoid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span></div>
+
+
+<div class="viewcode-block" id="Organoid.plot_organoid">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Organoid.plot_organoid">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_organoid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_properties</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">truncate_cells</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the structure of the organoid using Graphviz.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str, optional</span>
+<span class="sd">            The filename to save the plot as (in PNG format). Default is None.</span>
+<span class="sd">        show_properties : bool, optional</span>
+<span class="sd">            Whether to show properties of the agents and modules in the plot. Default is True.</span>
+<span class="sd">        dpi : int, optional</span>
+<span class="sd">            The DPI (dots per inch) of the plot. Default is 300.</span>
+<span class="sd">        truncate_cells : int, optional</span>
+<span class="sd">            The number of cells to show in the plot. If there are more cells, the remaining cells will be truncated.</span>
+<span class="sd">            Default is 10.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ImportError</span>
+<span class="sd">            If Graphviz is not installed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">graphviz</span> <span class="kn">import</span> <span class="n">Digraph</span>
+            <span class="n">dot</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">()</span>
+            <span class="n">dot</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">dpi</span><span class="p">))</span>
+
+            <span class="c1"># Add environment; prepend &quot;Base&quot; to environment name if it is the base class</span>
+            <span class="n">env_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="n">env_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Environment: </span><span class="si">{</span><span class="s2">&quot;Base&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">env_name</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">env_name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Environment&quot;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="p">(</span>
+                        <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Dimensions: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">dimensions</span><span class="si">}</span><span class="se">\n</span><span class="s1">Size: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">&#39;</span>
+                        <span class="k">if</span> <span class="n">show_properties</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;env&#39;</span><span class="p">,</span> <span class="n">env_label</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;rectangle&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Add organoid with superclass name</span>
+            <span class="n">organoid_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Organoid: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Agents: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+                                                                   <span class="k">if</span> <span class="n">show_properties</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;organoid&#39;</span><span class="p">,</span> <span class="n">organoid_label</span><span class="p">)</span>
+            <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;env&#39;</span><span class="p">,</span> <span class="s1">&#39;organoid&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Add cells and their modules</span>
+            <span class="n">cell_ids</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">do_truncate</span> <span class="o">=</span> <span class="p">(</span><span class="n">truncate_cells</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">truncate_cells</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_cells</span><span class="p">()):</span>
+                <span class="c1"># If there are more than TRUNCATE_CELLS cells, show cells 1-[TRUNCATE-1], (...) node, and last cell</span>
+                <span class="k">if</span> <span class="n">do_truncate</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">truncate_cells</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">ellipses_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;cell_</span><span class="si">{</span><span class="n">truncate_cells</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span>
+                    <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">ellipses_id</span><span class="p">,</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+                    <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;organoid&#39;</span><span class="p">,</span> <span class="n">ellipses_id</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;invis&#39;</span><span class="p">)</span>
+                    <span class="n">cell_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ellipses_id</span><span class="p">)</span>
+
+                    <span class="n">ellipses_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">truncate_cells</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s1">_mod_</span><span class="si">{</span><span class="mi">0</span><span class="si">}</span><span class="s1">&#39;</span>
+                    <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">ellipses_id</span><span class="p">,</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+                    <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cell_</span><span class="si">{</span><span class="n">truncate_cells</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ellipses_id</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;invis&#39;</span><span class="p">)</span>
+                    <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">ellipses_id</span><span class="p">,</span> <span class="s1">&#39;ml_model&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;invis&#39;</span><span class="p">)</span>
+
+                    <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cells</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_cells</span><span class="p">())</span> <span class="o">-</span> <span class="mi">1</span>
+
+                <span class="n">cell_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;cell_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="n">cell_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cell_id</span><span class="p">)</span>
+                <span class="c1"># Round each value in the position tuple to 2 decimal places</span>
+                <span class="n">cell_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Cell </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="p">(</span>
+                             <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Position: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">cell</span><span class="o">.</span><span class="n">position</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span>
+                             <span class="k">if</span> <span class="n">show_properties</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">cell_id</span><span class="p">,</span> <span class="n">cell_label</span><span class="p">)</span>
+                <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;organoid&#39;</span><span class="p">,</span> <span class="n">cell_id</span><span class="p">)</span>
+
+                <span class="c1"># Add modules to each cell</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">modules</span><span class="p">):</span>
+                    <span class="n">module_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cell_id</span><span class="si">}</span><span class="s1">_mod_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1">&#39;</span>
+                    <span class="n">module_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Module </span><span class="si">{</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">module</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">&#39;</span>
+                    <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">module_id</span><span class="p">,</span> <span class="n">module_label</span><span class="p">)</span>
+                    <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">cell_id</span><span class="p">,</span> <span class="n">module_id</span><span class="p">)</span>
+
+                    <span class="c1"># Add ML model reference if available</span>
+                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s1">&#39;ml_model&#39;</span><span class="p">):</span>
+                        <span class="n">ml_model_input_shape</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">ml_model</span><span class="o">.</span><span class="n">input_shape</span>
+                        <span class="n">ml_model_id</span> <span class="o">=</span> <span class="s1">&#39;ml_model&#39;</span>  <span class="c1"># f&#39;{module_id}_ml&#39;</span>
+                        <span class="n">ml_model_label</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">ml_model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Input Shape: </span><span class="si">{</span><span class="n">ml_model_input_shape</span><span class="si">}</span><span class="s1">&#39;</span>
+                                                                           <span class="k">if</span> <span class="n">show_properties</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                        <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">ml_model_id</span><span class="p">,</span> <span class="n">ml_model_label</span><span class="p">)</span>
+                        <span class="k">with</span> <span class="n">dot</span><span class="o">.</span><span class="n">subgraph</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+                            <span class="n">s</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="n">rank</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+                            <span class="n">s</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">ml_model_id</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;rectangle&#39;</span><span class="p">)</span>
+                        <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">module_id</span><span class="p">,</span> <span class="n">ml_model_id</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;back&#39;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">do_truncate</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_cells</span><span class="p">())</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="k">break</span>
+
+            <span class="k">with</span> <span class="n">dot</span><span class="o">.</span><span class="n">subgraph</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="n">rank</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">cell_id</span> <span class="ow">in</span> <span class="n">cell_ids</span><span class="p">:</span>
+                    <span class="n">s</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">cell_id</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># If the filename has an extension, use it; otherwise, default to PNG</span>
+                <span class="n">ext</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;png&#39;</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">dot</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">ext</span><span class="p">,</span> <span class="n">cleanup</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Organoid structure plot saved as &quot;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dot</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Graphviz is required to plot the organoid structure.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">e</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Daniel Szelogowski.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

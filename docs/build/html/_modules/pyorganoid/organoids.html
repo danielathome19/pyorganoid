@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyorganoid.organoids &mdash; PyOrganoid 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PyOrganoid
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">pyorganoid</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PyOrganoid</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyorganoid.organoids</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyorganoid.organoids</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">.cells</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.modules</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Organoid</span><span class="p">,</span> <span class="n">Synapse</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">generate_random_position</span>
+
+
+<div class="viewcode-block" id="SpikingNeuronOrganoid">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.organoids.SpikingNeuronOrganoid">[docs]</a>
+<span class="k">class</span> <span class="nc">SpikingNeuronOrganoid</span><span class="p">(</span><span class="n">Organoid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents an organoid composed of spiking neurons. It is a subclass of the base Organoid class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    environment : Environment</span>
+<span class="sd">        The environment in which the organoid resides.</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model used by the spiking neuron modules.</span>
+<span class="sd">    num_cells : int, optional</span>
+<span class="sd">        The number of spiking neurons in the organoid. Default is 10.</span>
+<span class="sd">    input_data_func : callable, optional</span>
+<span class="sd">        A function that generates input data for the spiking neurons. Defaults to &#39;() =&gt; [0.5] * 10&#39; if None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">,</span> <span class="n">ml_model</span><span class="p">,</span> <span class="n">num_cells</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_cells</span><span class="p">):</span>
+            <span class="n">neuron</span> <span class="o">=</span> <span class="n">SpikingNeuronCell</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">generate_random_position</span><span class="p">(</span><span class="n">environment</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">environment</span><span class="o">.</span><span class="n">size</span><span class="p">),</span>
+                                       <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span><span class="p">)</span>
+            <span class="n">neuron</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="n">SpikingNeuronModule</span><span class="p">(</span><span class="n">ml_model</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">neuron</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="GrowthShrinkageOrganoid">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.organoids.GrowthShrinkageOrganoid">[docs]</a>
+<span class="k">class</span> <span class="nc">GrowthShrinkageOrganoid</span><span class="p">(</span><span class="n">Organoid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents an organoid composed of cells that grow and shrink based on machine learning predictions.</span>
+<span class="sd">    It is a subclass of the base Organoid class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    environment : Environment</span>
+<span class="sd">        The environment in which the organoid resides.</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model used by the growth/shrinkage cell modules.</span>
+<span class="sd">    num_cells : int, optional</span>
+<span class="sd">        The number of growth/shrinkage cells in the organoid. Default is 10.</span>
+<span class="sd">    initial_cell_volume : float, optional</span>
+<span class="sd">        The initial volume of the cells. Default is 1.0. Use &quot;None&quot; for random volumes in the range [0.5, 1.5].</span>
+<span class="sd">    growth_amount : float, optional</span>
+<span class="sd">        The amount by which the cells grow at each time step. Default is 0.1.</span>
+<span class="sd">    growth_variance : float, optional</span>
+<span class="sd">        The variance of the growth amount. Default is 0.05.</span>
+<span class="sd">    prediction_threshold : float, optional</span>
+<span class="sd">        The threshold above which the cells grow and below which they shrink. Default is 0.5.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">,</span> <span class="n">ml_model</span><span class="p">,</span> <span class="n">num_cells</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">initial_cell_volume</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">growth_amount</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">growth_variance</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">prediction_threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_cells</span><span class="p">):</span>
+            <span class="n">initial_volume</span> <span class="o">=</span> <span class="n">initial_cell_volume</span> <span class="k">if</span> <span class="n">initial_cell_volume</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">GrowthShrinkageCell</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">generate_random_position</span><span class="p">(</span><span class="n">environment</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">environment</span><span class="o">.</span><span class="n">size</span><span class="p">),</span>
+                                       <span class="n">initial_volume</span><span class="o">=</span><span class="n">initial_volume</span><span class="p">)</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="n">GrowthShrinkageModule</span><span class="p">(</span><span class="n">ml_model</span><span class="p">,</span> <span class="n">growth_amount</span><span class="p">,</span> <span class="n">growth_variance</span><span class="p">,</span> <span class="n">prediction_threshold</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="DifferentiationOrganoid">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.organoids.DifferentiationOrganoid">[docs]</a>
+<span class="k">class</span> <span class="nc">DifferentiationOrganoid</span><span class="p">(</span><span class="n">Organoid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents an organoid composed of differentiating (e.g., neural network) cells.</span>
+<span class="sd">    It is a subclass of the base Organoid class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    environment : Environment</span>
+<span class="sd">        The environment in which the organoid resides.</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model used by the differentiating cell modules.</span>
+<span class="sd">    num_cells : int, optional</span>
+<span class="sd">        The number of differentiating cells in the organoid. Default is 10.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">,</span> <span class="n">ml_model</span><span class="p">,</span> <span class="n">num_cells</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_cells</span><span class="p">):</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">DifferentiatingCell</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">generate_random_position</span><span class="p">(</span><span class="n">environment</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">environment</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="n">DifferentiationModule</span><span class="p">(</span><span class="n">ml_model</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ChemotaxisOrganoid">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.organoids.ChemotaxisOrganoid">[docs]</a>
+<span class="k">class</span> <span class="nc">ChemotaxisOrganoid</span><span class="p">(</span><span class="n">Organoid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents an organoid composed of chemotactic cells. It is a subclass of the base Organoid class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    environment : Environment</span>
+<span class="sd">        The environment in which the organoid resides.</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model used by the chemotactic cell modules.</span>
+<span class="sd">    num_cells : int, optional</span>
+<span class="sd">        The number of chemotactic cells in the organoid. Default is 10.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">,</span> <span class="n">ml_model</span><span class="p">,</span> <span class="n">num_cells</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_cells</span><span class="p">):</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">ChemotacticCell</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">generate_random_position</span><span class="p">(</span><span class="n">environment</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">environment</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="n">ChemotaxisModule</span><span class="p">(</span><span class="n">ml_model</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ImmuneResponseOrganoid">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.organoids.ImmuneResponseOrganoid">[docs]</a>
+<span class="k">class</span> <span class="nc">ImmuneResponseOrganoid</span><span class="p">(</span><span class="n">Organoid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents an organoid composed of immune cells that respond to external stimuli.</span>
+<span class="sd">    It is a subclass of the base Organoid class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    environment : Environment</span>
+<span class="sd">        The environment in which the organoid resides.</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model used by the immune cell modules.</span>
+<span class="sd">    num_cells : int, optional</span>
+<span class="sd">        The number of immune cells in the organoid. Default is 10.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">,</span> <span class="n">ml_model</span><span class="p">,</span> <span class="n">num_cells</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_cells</span><span class="p">):</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">ImmuneCell</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">generate_random_position</span><span class="p">(</span><span class="n">environment</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">environment</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="n">ImmuneResponseModule</span><span class="p">(</span><span class="n">ml_model</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="SynapticPlasticityOrganoid">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.organoids.SynapticPlasticityOrganoid">[docs]</a>
+<span class="k">class</span> <span class="nc">SynapticPlasticityOrganoid</span><span class="p">(</span><span class="n">Organoid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents an organoid composed of neurons with synaptic plasticity (STDP).</span>
+<span class="sd">    It is a subclass of the base Organoid class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    environment : Environment</span>
+<span class="sd">        The environment in which the organoid resides.</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model used by the synaptic plasticity cell modules.</span>
+<span class="sd">    num_cells : int, optional</span>
+<span class="sd">        The number of synaptic plasticity cells (i.e., neurons) in the organoid. Default is 10.</span>
+<span class="sd">    num_synapses : int, optional</span>
+<span class="sd">        The number of synapses connecting the plasticity cells. Default is 5.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">,</span> <span class="n">ml_model</span><span class="p">,</span> <span class="n">num_cells</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">num_synapses</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_cells</span><span class="p">):</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">SynapticPlasticityCell</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">generate_random_position</span><span class="p">(</span><span class="n">environment</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">environment</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="n">SynapticPlasticityModule</span><span class="p">(</span><span class="n">ml_model</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_synapses</span><span class="p">):</span>
+            <span class="n">pre_cell</span><span class="p">,</span> <span class="n">post_cell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">synapse</span> <span class="o">=</span> <span class="n">Synapse</span><span class="p">(</span><span class="n">pre_neuron</span><span class="o">=</span><span class="n">pre_cell</span><span class="p">,</span> <span class="n">post_neuron</span><span class="o">=</span><span class="n">post_cell</span><span class="p">)</span>
+            <span class="n">pre_cell</span><span class="o">.</span><span class="n">add_synapse</span><span class="p">(</span><span class="n">synapse</span><span class="p">)</span>
+            <span class="n">post_cell</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="n">SynapticPlasticityModule</span><span class="p">(</span><span class="n">synapse</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="MetabolicOrganoid">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.organoids.MetabolicOrganoid">[docs]</a>
+<span class="k">class</span> <span class="nc">MetabolicOrganoid</span><span class="p">(</span><span class="n">Organoid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents an organoid composed of cells with metabolic modules.</span>
+<span class="sd">    It is a subclass of the base Organoid class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    environment : Environment</span>
+<span class="sd">        The environment in which the organoid resides.</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model used by the metabolic cell modules.</span>
+<span class="sd">    num_cells : int, optional</span>
+<span class="sd">        The number of metabolic cells in the organoid. Default is 10.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">,</span> <span class="n">ml_model</span><span class="p">,</span> <span class="n">num_cells</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_cells</span><span class="p">):</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">MetabolicCell</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">generate_random_position</span><span class="p">(</span><span class="n">environment</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">environment</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="n">MetabolicModule</span><span class="p">(</span><span class="n">ml_model</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="GeneRegulationOrganoid">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.organoids.GeneRegulationOrganoid">[docs]</a>
+<span class="k">class</span> <span class="nc">GeneRegulationOrganoid</span><span class="p">(</span><span class="n">Organoid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents an organoid composed of cells with gene regulation modules.</span>
+<span class="sd">    It is a subclass of the base Organoid class.</span>
+<span class="sd">    NOTE: In the future, this class could be extended to include sequence data and gene expression profiles.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    environment : Environment</span>
+<span class="sd">        The environment in which the organoid resides.</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model used by the gene regulation cell modules.</span>
+<span class="sd">    num_cells : int, optional</span>
+<span class="sd">        The number of gene regulation cells in the organoid. Default is 10.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">,</span> <span class="n">ml_model</span><span class="p">,</span> <span class="n">num_cells</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_cells</span><span class="p">):</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">GeneRegulationCell</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">generate_random_position</span><span class="p">(</span><span class="n">environment</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">environment</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="n">GeneRegulationModule</span><span class="p">(</span><span class="n">ml_model</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_agent</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Daniel Szelogowski.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
