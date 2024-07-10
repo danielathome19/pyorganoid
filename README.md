@@ -40,6 +40,9 @@ to help us improve the package and expand its capabilities. If you are intereste
 <p style="font-size: 6px">*As of July 6th, 2024, to the best of our knowledge :)</p>
 
 
+<img src=".github/images/spiking_organoid.png" style="width:100%;" align="center" alt="Organoid Example">
+
+
 ## Installation
 
 
@@ -91,10 +94,24 @@ conda install -c conda-forge pyorganoid-sklearn
 
 ## Quickstart
 
-For a quick introduction to Pyorganoid, see the [Spiking Nueron Test](tests/spiking_test.py) in the `test` directory.
+For a quick introduction to Pyorganoid, see the [Spiking Neuron Test](tests/spiking_test.py) in the `test` directory.
 This test demonstrates the creation of a simple spiking neuron organoid running a binary classification Multi-Layer
 Perceptron (MLP) model using TensorFlow.
 
+If you prefer Scikit-Learn or PyTorch, see the [Volumetric Organoid Test (Scikit-Learn)](tests/growshrink_test.py) or
+the [XYZ Organoid Test (PyTorch)](tests/XYZ_test.py), respectively.
+
+
+<table style="width:100%;">
+<tr>
+<td>
+    <img src=".github/images/membranepotential.png" style="width:100%;" align="center" alt="Spiking Organoid Example">
+</td>
+<td>
+    <img src=".github/images/growshrink.png" style="width:100%;" align="center" alt="Volumetric Organoid Example">    
+</td>
+</tr>
+</table>
 
 ## License
 
