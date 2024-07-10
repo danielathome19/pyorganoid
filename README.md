@@ -1,7 +1,6 @@
-<h1 align="center">
-<img src=".github/images/logo_hero.png" width="400" alt="Pyorganoid Logo" style="max-width:100%;">
-</h1><br>
-
+<center>
+    <img src=".github/images/logo_hero.png" width="400" alt="Pyorganoid Logo" style="max-width:100%;">
+</center>
 
 [![PyPI Downloads](https://img.shields.io/pypi/dm/pyorganoid.svg?label=PyPI%20downloads)](
 https://pypi.org/project/pyorganoid/)
