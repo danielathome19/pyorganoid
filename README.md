@@ -17,7 +17,7 @@ Organoid Intelligence (OI) and Organoid Learning (OL).
 It is designed to be simple to use and easy to extend with support for standard machine
 learning libraries such as TensorFlow, PyTorch, and Scikit-Learn.
 
-- **Website:** https://danielathome19.github.io/pyorganoid/
+<!-- - **Website:** https://danielathome19.github.io/pyorganoid/ -->
 - **Documentation:** https://danielathome19.github.io/pyorganoid/docs/
 - **Source code:** https://github.com/danielathome19/pyorganoid
 - **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md)
