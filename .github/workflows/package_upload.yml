@@ -65,7 +65,7 @@ jobs:
       run: |
         PACKAGE_NAME="pyorganoid"
         VERSION=$(python setup.py --version)
-        response=$(curl -s -o /dev/null -w "%{http_code}" https://anaconda.org/$ANACONDA_USER/$PACKAGE_NAME/$VERSION/download/$PACKAGE_NAME-$VERSION.tar.bz2)
+        response=$(curl -s -o /dev/null -w "%{http_code}" https://anaconda.org/$ANACONDA_USER/$PACKAGE_NAME/$VERSION/download/linux-64/$PACKAGE_NAME-$VERSION.tar.bz2)
         if [ $response -eq 200 ]; then
           echo "Version $VERSION already exists on Conda."
           echo "::set-output name=exists::true"
