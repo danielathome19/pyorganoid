@@ -1,0 +1,21 @@
+package:
+  name: pyorganoid
+  version: "0.1.1"
+
+source:
+  path: ..
+
+build:
+  script: python setup.py install
+
+requirements:
+  build:
+    - python
+    - setuptools
+  run:
+    - python
+
+about:
+  home: https://github.com/danielathome19/pyorganoid
+  license: BSD-3-Clause
+  summary: A Python package for the simulation of organoids for the purpose of studying Organoid Intelligence (OI) and Organoid Learning (OL).
