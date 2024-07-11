@@ -8,6 +8,7 @@ setup(
     description='A Python package for the simulation of organoids for the purpose of studying '
                 'Organoid Intelligence (OI) and Organoid Learning (OL).',
     long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     install_requires=[
         'numpy',
         'matplotlib',
