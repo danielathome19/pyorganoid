@@ -25,7 +25,4 @@ setup(
             'pyorganoid=pyorganoid:main',
         ],
     },
-    classifiers=[
-        'License :: OSI Approved :: BSD-3 License',
-    ]
 )

@@ -43,7 +43,7 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
       run: |
         pip install twine
-        twine upload dist/*
+        twine upload dist/* --verbose
 
     - name: Install Conda
       if: success()
