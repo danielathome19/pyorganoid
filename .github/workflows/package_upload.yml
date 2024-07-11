@@ -60,8 +60,22 @@ jobs:
         pip install twine
         twine upload dist/* --verbose
 
+    - name: Check if version exists on Conda
+      id: conda_version_check
+      run: |
+        PACKAGE_NAME="pyorganoid"
+        VERSION=$(python setup.py --version)
+        response=$(curl -s -o /dev/null -w "%{http_code}" https://anaconda.org/$ANACONDA_USER/$PACKAGE_NAME/$VERSION/download/$PACKAGE_NAME-$VERSION.tar.bz2)
+        if [ $response -eq 200 ]; then
+          echo "Version $VERSION already exists on Conda."
+          echo "::set-output name=exists::true"
+        else
+          echo "Version $VERSION does not exist on Conda."
+          echo "::set-output name=exists::false"
+        fi
+
     - name: Install Conda and dependencies
-      if: success()
+      if: steps.conda_version_check.outputs.exists == 'false'
       uses: goanpeca/setup-miniconda@v2
       with:
         auto-update-conda: true
@@ -69,12 +83,12 @@ jobs:
         python-version: 3.8
 
     - name: Install conda-build and anaconda-client
-      if: success()
+      if: steps.conda_version_check.outputs.exists == 'false'
       run: |
         conda install -y conda-build anaconda-client
 
     - name: Build Conda package
-      if: success()
+      if: steps.conda_version_check.outputs.exists == 'false'
       shell: bash -l {0}
       run: |
         conda config --set anaconda_upload no
@@ -83,7 +97,7 @@ jobs:
         conda-build . --output-folder build_output
 
     - name: Publish to Conda
-      if: success()
+      if: steps.conda_version_check.outputs.exists == 'false'
       env:
         ANACONDA_USER: ${{ secrets.CONDA_USERNAME }}
         ANACONDA_PASSWORD: ${{ secrets.CONDA_PASSWORD }}
