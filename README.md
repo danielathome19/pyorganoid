@@ -7,7 +7,7 @@ https://pypi.org/project/pyorganoid/)
 [![Conda Downloads](https://img.shields.io/conda/dn/danielathome19/pyorganoid.svg?label=Conda%20downloads)](
 https://anaconda.org/danielathome19/pyorganoid)
 [![CI/CT/CD](https://github.com/danielathome19/pyorganoid/actions/workflows/package_upload.yml/badge.svg)](https://github.com/danielathome19/pyorganoid/actions/workflows/package_upload.yml)
-[![License](https://img.shields.io/badge/license-BSD3-blue)](./LICENSE.md)
+[![License](https://img.shields.io/badge/license-BSD_3_Clause-blue)](./LICENSE.md)
 <!--[![Research Paper](https://img.shields.io/badge/DOI-10)](
 https://DOI_LINK_HERE)-->
 
@@ -20,8 +20,8 @@ learning libraries such as TensorFlow, PyTorch, and Scikit-Learn (as well as ONN
 <!-- - **Website:** https://danielathome19.github.io/pyorganoid/ -->
 - **Documentation:** https://danielathome19.github.io/pyorganoid/docs/
 - **Source code:** https://github.com/danielathome19/pyorganoid
-- **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Bug reports:** https://github.com/danielathome19/pyorganoid/issues
+- **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md)
 
 It provides:
 
@@ -74,22 +74,22 @@ pip install pyorganoid[onnx]
 Pyorganoid can also be installed using `conda`:
 
 ```bash
-conda install -c conda-forge pyorganoid
+conda install -c danielathome19 pyorganoid
 ```
 
 To include support for all machine learning libraries, use:
 
 ```bash
-conda install -c conda-forge pyorganoid-all
+conda install -c danielathome19 pyorganoid-all
 ```
 
 Or, to include support for a specific library (TensorFlow, PyTorch, Scikit-Learn, or ONNX), use:
 
 ```bash
-conda install -c conda-forge pyorganoid-tensorflow
-conda install -c conda-forge pyorganoid-torch
-conda install -c conda-forge pyorganoid-sklearn
-conda install -c conda-forge pyorganoid-onnx
+conda install -c danielathome19 pyorganoid-tensorflow
+conda install -c danielathome19 pyorganoid-torch
+conda install -c danielathome19 pyorganoid-sklearn
+conda install -c danielathome19 pyorganoid-onnx
 ```
 
 
