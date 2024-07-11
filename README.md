@@ -95,13 +95,13 @@ conda install -c conda-forge pyorganoid-onnx
 
 ## Quickstart
 
-For a quick introduction to Pyorganoid, see the [Spiking Neuron Test](tests/spiking_test.py) in the `test` directory.
+For a quick introduction to Pyorganoid, see the [Spiking Neuron Test](tests/test_spiking.py) in the `test` directory.
 This test demonstrates the creation of a simple spiking neuron organoid running a binary classification Multi-Layer
 Perceptron (MLP) model using TensorFlow.
 
-If you prefer Scikit-Learn, PyTorch, or ONNX models, see the [Volumetric Organoid Test (Scikit-Learn)](tests/growshrink_test.py),
-the [Gene Regulation Organoid Test (PyTorch)](tests/generegulation_test.py), or
-the [Immune Response Organoid Test (ONNX)](tests/immune_test.py), respectively.
+If you prefer Scikit-Learn, PyTorch, or ONNX models, see the [Volumetric Organoid Test (Scikit-Learn)](tests/test_growshrink.py),
+the [Gene Regulation Organoid Test (PyTorch)](tests/test_generegulation.py), or
+the [Immune Response Organoid Test (ONNX)](tests/test_immune.py), respectively.
 
 
 <table style="width:100%;">
