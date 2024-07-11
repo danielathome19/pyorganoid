@@ -36,8 +36,23 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
 
+    - name: Check if version exists on PyPI
+      id: pypi_version_check
+      run: |
+        pip install requests
+        PACKAGE_NAME="pyorganoid"
+        VERSION=$(python setup.py --version)
+        response=$(curl -s -o /dev/null -w "%{http_code}" https://pypi.org/project/$PACKAGE_NAME/$VERSION/)
+        if [ $response -eq 200 ]; then
+          echo "Version $VERSION already exists on PyPI."
+          echo "::set-output name=exists::true"
+        else
+          echo "Version $VERSION does not exist on PyPI."
+          echo "::set-output name=exists::false"
+        fi
+
     - name: Publish to PyPI
-      if: success()
+      if: steps.pypi_version_check.outputs.exists == 'false'
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
@@ -45,7 +60,7 @@ jobs:
         pip install twine
         twine upload dist/* --verbose
 
-    - name: Install Conda
+    - name: Install Conda and dependencies
       if: success()
       uses: goanpeca/setup-miniconda@v2
       with:
@@ -53,13 +68,10 @@ jobs:
         miniforge-variant: Mambaforge
         python-version: 3.8
 
-    - name: Install conda dependencies
+    - name: Install conda-build and anaconda-client
+      if: success()
       run: |
-        conda install conda-build anaconda-client
-
-    - name: Initialize Conda
-      shell: bash -l {0}
-      run: |
+        conda install -y conda-build anaconda-client
         conda init bash
         source ~/.bashrc
 
@@ -79,12 +91,14 @@ jobs:
         anaconda upload build_output/**/pyorganoid-*.tar.bz2 --force
 
     - name: Build documentation
+      if: success()
       run: |
         cd docs
         make clean
         make html
 
     - name: Deploy to GitHub Pages
+      if: success()
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
