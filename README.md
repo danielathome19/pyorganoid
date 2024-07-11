@@ -7,7 +7,7 @@ https://pypi.org/project/pyorganoid/)
 [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pyorganoid.svg?label=Conda%20downloads)](
 https://anaconda.org/conda-forge/pyorganoid)
 [![CI/CT/CD](https://github.com/danielathome19/pyorganoid/actions/workflows/package_upload.yml/badge.svg)](https://github.com/danielathome19/pyorganoid/actions/workflows/package_upload.yml)
-[![License](https://img.shields.io/github/license/danielathome19/pyorganoid.svg)](https://github.com/danielathome19/pyorganoid/blob/main/LICENSE.md)
+[![License](https://img.shields.io/badge/license-BSD3-blue)](./LICENSE.md)
 <!--[![Research Paper](https://img.shields.io/badge/DOI-10)](
 https://DOI_LINK_HERE)-->
 
