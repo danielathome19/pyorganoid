@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyorganoid &mdash; PyOrganoid 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pyorganoid package" href="pyorganoid.html" />
+    <link rel="prev" title="Welcome to PyOrganoid’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyOrganoid
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pyorganoid</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html">pyorganoid package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyOrganoid</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pyorganoid</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyorganoid">
+<h1>pyorganoid<a class="headerlink" href="#pyorganoid" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyorganoid.html">pyorganoid package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.agents">pyorganoid.agents module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.agents.AgentContainer"><code class="docutils literal notranslate"><span class="pre">AgentContainer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.agents.AgentContainer.agents"><code class="docutils literal notranslate"><span class="pre">AgentContainer.agents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.agents.AgentContainer.add_agent"><code class="docutils literal notranslate"><span class="pre">AgentContainer.add_agent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.agents.AgentContainer.get_agents"><code class="docutils literal notranslate"><span class="pre">AgentContainer.get_agents()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.agents.AgentContainer.get_agent_by_id"><code class="docutils literal notranslate"><span class="pre">AgentContainer.get_agent_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id0"><code class="docutils literal notranslate"><span class="pre">AgentContainer.add_agent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id1"><code class="docutils literal notranslate"><span class="pre">AgentContainer.get_agent_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id2"><code class="docutils literal notranslate"><span class="pre">AgentContainer.get_agents()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.agents.AgentHandle"><code class="docutils literal notranslate"><span class="pre">AgentHandle</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.agents.AgentHandle.agent_id"><code class="docutils literal notranslate"><span class="pre">AgentHandle.agent_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.agents.AgentHandle.container"><code class="docutils literal notranslate"><span class="pre">AgentHandle.container</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.agents.AgentHandle.get_agent"><code class="docutils literal notranslate"><span class="pre">AgentHandle.get_agent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id3"><code class="docutils literal notranslate"><span class="pre">AgentHandle.get_agent()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.base">pyorganoid.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Agent"><code class="docutils literal notranslate"><span class="pre">Agent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Agent.position"><code class="docutils literal notranslate"><span class="pre">Agent.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Agent.modules"><code class="docutils literal notranslate"><span class="pre">Agent.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Agent.add_module"><code class="docutils literal notranslate"><span class="pre">Agent.add_module()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Agent.update"><code class="docutils literal notranslate"><span class="pre">Agent.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id4"><code class="docutils literal notranslate"><span class="pre">Agent.add_module()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id5"><code class="docutils literal notranslate"><span class="pre">Agent.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Cell"><code class="docutils literal notranslate"><span class="pre">Cell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Cell.position"><code class="docutils literal notranslate"><span class="pre">Cell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Cell.modules"><code class="docutils literal notranslate"><span class="pre">Cell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Cell.history"><code class="docutils literal notranslate"><span class="pre">Cell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Cell.input_data_func"><code class="docutils literal notranslate"><span class="pre">Cell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Cell.add_module"><code class="docutils literal notranslate"><span class="pre">Cell.add_module()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Cell.update"><code class="docutils literal notranslate"><span class="pre">Cell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Cell.get_history"><code class="docutils literal notranslate"><span class="pre">Cell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Cell.default_input_data_func"><code class="docutils literal notranslate"><span class="pre">Cell.default_input_data_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Cell.get_input_data"><code class="docutils literal notranslate"><span class="pre">Cell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id6"><code class="docutils literal notranslate"><span class="pre">Cell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id7"><code class="docutils literal notranslate"><span class="pre">Cell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id8"><code class="docutils literal notranslate"><span class="pre">Cell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Organoid"><code class="docutils literal notranslate"><span class="pre">Organoid</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Organoid.environment"><code class="docutils literal notranslate"><span class="pre">Organoid.environment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Organoid.agents"><code class="docutils literal notranslate"><span class="pre">Organoid.agents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Organoid.add_agent"><code class="docutils literal notranslate"><span class="pre">Organoid.add_agent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Organoid.get_cells"><code class="docutils literal notranslate"><span class="pre">Organoid.get_cells()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id9"><code class="docutils literal notranslate"><span class="pre">Organoid.add_agent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id10"><code class="docutils literal notranslate"><span class="pre">Organoid.get_cells()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Organoid.plot_organoid"><code class="docutils literal notranslate"><span class="pre">Organoid.plot_organoid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Organoid.plot_simulation_history"><code class="docutils literal notranslate"><span class="pre">Organoid.plot_simulation_history()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Synapse"><code class="docutils literal notranslate"><span class="pre">Synapse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Synapse.pre_neuron"><code class="docutils literal notranslate"><span class="pre">Synapse.pre_neuron</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Synapse.post_neuron"><code class="docutils literal notranslate"><span class="pre">Synapse.post_neuron</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Synapse.weight"><code class="docutils literal notranslate"><span class="pre">Synapse.weight</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.base.Synapse.transmit"><code class="docutils literal notranslate"><span class="pre">Synapse.transmit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.cells">pyorganoid.cells module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ChemotacticCell"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ChemotacticCell.position"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ChemotacticCell.modules"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ChemotacticCell.history"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ChemotacticCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ChemotacticCell.chemotactic_gradient"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.chemotactic_gradient</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ChemotacticCell.update"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ChemotacticCell.get_history"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ChemotacticCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ChemotacticCell.move_towards_gradient"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.move_towards_gradient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ChemotacticCell.get_chemotactic_gradient"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.get_chemotactic_gradient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id11"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.get_chemotactic_gradient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id12"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.move_towards_gradient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id13"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.DifferentiatingCell"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.DifferentiatingCell.position"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.DifferentiatingCell.modules"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.DifferentiatingCell.history"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.DifferentiatingCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.DifferentiatingCell.state"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.state</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.DifferentiatingCell.update"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.DifferentiatingCell.get_history"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.DifferentiatingCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.DifferentiatingCell.differentiate"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.differentiate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.DifferentiatingCell.get_state"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.get_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id14"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.differentiate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id15"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.get_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id16"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell.position"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell.modules"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell.history"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell.gene_expression_level"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.gene_expression_level</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell.regulation_variance"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.regulation_variance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell.update"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell.get_history"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell.regulate_genes"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.regulate_genes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GeneRegulationCell.get_gene_expression_level"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.get_gene_expression_level()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id17"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.get_gene_expression_level()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id18"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.regulate_genes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id19"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.position"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.modules"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.history"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.volume"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.volume</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.update"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.get_history"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.grow"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.grow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.shrink"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.shrink()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.get_volume"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.get_volume()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id20"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.get_volume()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id21"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.grow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id22"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.shrink()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id23"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell"><code class="docutils literal notranslate"><span class="pre">ImmuneCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell.position"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell.modules"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell.history"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell.active"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.active</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell.update"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell.get_history"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell.activate"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.activate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell.deactivate"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.deactivate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.ImmuneCell.is_active"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.is_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id24"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.activate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id25"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.deactivate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id26"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.is_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id27"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell"><code class="docutils literal notranslate"><span class="pre">MetabolicCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell.position"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell.modules"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell.history"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell.metabolism_rate"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.metabolism_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell.energy"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.energy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell.update"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell.get_history"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell.metabolize"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.metabolize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.MetabolicCell.get_energy"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.get_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id28"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.get_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id29"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.metabolize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id30"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.position"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.modules"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.history"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.membrane_potential"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.membrane_potential</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.threshold"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.threshold</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.update"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.get_history"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.spike"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.spike()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.default_input_data_func"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.default_input_data_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id31"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.spike()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id32"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.position"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.modules"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.history"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.synapses"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.synapses</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.update"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.get_history"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.add_synapse"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.add_synapse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.get_synapses"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.get_synapses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id33"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.add_synapse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id34"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.get_synapses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id35"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.environments">pyorganoid.environments module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ChemicalGradientEnvironment"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ChemicalGradientEnvironment.conditions"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ChemicalGradientEnvironment.dimensions"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ChemicalGradientEnvironment.size"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ChemicalGradientEnvironment.gradient_func"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.gradient_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ChemicalGradientEnvironment.update"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ChemicalGradientEnvironment.add_condition"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ChemicalGradientEnvironment.get_concentration"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.get_concentration()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id36"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.get_concentration()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ElectricFieldEnvironment"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ElectricFieldEnvironment.conditions"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ElectricFieldEnvironment.dimensions"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ElectricFieldEnvironment.size"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ElectricFieldEnvironment.field_strength"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.field_strength</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ElectricFieldEnvironment.update"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ElectricFieldEnvironment.add_condition"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.ElectricFieldEnvironment.get_field_effect"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.get_field_effect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id37"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.get_field_effect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.Environment"><code class="docutils literal notranslate"><span class="pre">Environment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.Environment.conditions"><code class="docutils literal notranslate"><span class="pre">Environment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.Environment.dimensions"><code class="docutils literal notranslate"><span class="pre">Environment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.Environment.size"><code class="docutils literal notranslate"><span class="pre">Environment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.Environment.update"><code class="docutils literal notranslate"><span class="pre">Environment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.Environment.add_condition"><code class="docutils literal notranslate"><span class="pre">Environment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id38"><code class="docutils literal notranslate"><span class="pre">Environment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id39"><code class="docutils literal notranslate"><span class="pre">Environment.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.GradientEnvironment"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.GradientEnvironment.conditions"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.GradientEnvironment.dimensions"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.GradientEnvironment.size"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.GradientEnvironment.gradient_func"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.gradient_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.GradientEnvironment.update"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.GradientEnvironment.add_condition"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.GradientEnvironment.get_gradient"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.get_gradient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id40"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.get_gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.StochasticEnvironment"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.StochasticEnvironment.conditions"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.StochasticEnvironment.dimensions"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.StochasticEnvironment.size"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.StochasticEnvironment.noise_level"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.noise_level</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.StochasticEnvironment.update"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.StochasticEnvironment.add_condition"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.StochasticEnvironment.get_noise"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.get_noise()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id41"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.get_noise()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.TemperatureEnvironment"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.TemperatureEnvironment.conditions"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.TemperatureEnvironment.dimensions"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.TemperatureEnvironment.size"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.TemperatureEnvironment.temperature"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.temperature</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.TemperatureEnvironment.temperature_range"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.temperature_range</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.TemperatureEnvironment.update"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.TemperatureEnvironment.add_condition"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.TemperatureEnvironment.get_temperature"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.get_temperature()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.environments.TemperatureEnvironment.set_temperature"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.set_temperature()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id42"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.get_temperature()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id43"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.set_temperature()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id44"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.models">pyorganoid.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.models.BaseMLModel"><code class="docutils literal notranslate"><span class="pre">BaseMLModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.models.BaseMLModel.predict"><code class="docutils literal notranslate"><span class="pre">BaseMLModel.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id45"><code class="docutils literal notranslate"><span class="pre">BaseMLModel.predict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.modules">pyorganoid.modules module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.BaseMLModule"><code class="docutils literal notranslate"><span class="pre">BaseMLModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.BaseMLModule.ml_model"><code class="docutils literal notranslate"><span class="pre">BaseMLModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.BaseMLModule.run"><code class="docutils literal notranslate"><span class="pre">BaseMLModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.BaseMLModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">BaseMLModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.BaseMLModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">BaseMLModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id46"><code class="docutils literal notranslate"><span class="pre">BaseMLModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id47"><code class="docutils literal notranslate"><span class="pre">BaseMLModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.BaseMLModule.drop_prediction_dimensionality"><code class="docutils literal notranslate"><span class="pre">BaseMLModule.drop_prediction_dimensionality()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id48"><code class="docutils literal notranslate"><span class="pre">BaseMLModule.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.BaseModule"><code class="docutils literal notranslate"><span class="pre">BaseModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.BaseModule.run"><code class="docutils literal notranslate"><span class="pre">BaseModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id49"><code class="docutils literal notranslate"><span class="pre">BaseModule.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.ChemotaxisModule"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.ChemotaxisModule.ml_model"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.ChemotaxisModule.run"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.ChemotaxisModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.ChemotaxisModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id50"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.DifferentiationModule"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.DifferentiationModule.ml_model"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.DifferentiationModule.run"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.DifferentiationModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.DifferentiationModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id51"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GeneRegulationModule"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GeneRegulationModule.ml_model"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GeneRegulationModule.run"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GeneRegulationModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GeneRegulationModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id52"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule.ml_model"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule.growth_amount"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.growth_amount</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule.growth_variance"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.growth_variance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule.prediction_threshold"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.prediction_threshold</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule.run"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id53"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.ImmuneResponseModule"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.ImmuneResponseModule.ml_model"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.ImmuneResponseModule.run"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.ImmuneResponseModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.ImmuneResponseModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id54"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.MetabolicModule"><code class="docutils literal notranslate"><span class="pre">MetabolicModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.MetabolicModule.ml_model"><code class="docutils literal notranslate"><span class="pre">MetabolicModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.MetabolicModule.run"><code class="docutils literal notranslate"><span class="pre">MetabolicModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.MetabolicModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">MetabolicModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.MetabolicModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">MetabolicModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id55"><code class="docutils literal notranslate"><span class="pre">MetabolicModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.SpikingNeuronModule"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.SpikingNeuronModule.ml_model"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.SpikingNeuronModule.run"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.SpikingNeuronModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.SpikingNeuronModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id56"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.SynapticPlasticityModule"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.SynapticPlasticityModule.synapse"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule.synapse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.SynapticPlasticityModule.learning_rate"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule.learning_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.SynapticPlasticityModule.run"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.modules.SynapticPlasticityModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id57"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.onnx_module">pyorganoid.onnx_module module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.onnx_module.ONNXModel"><code class="docutils literal notranslate"><span class="pre">ONNXModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.onnx_module.ONNXModel.model"><code class="docutils literal notranslate"><span class="pre">ONNXModel.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.onnx_module.ONNXModel.input_shape"><code class="docutils literal notranslate"><span class="pre">ONNXModel.input_shape</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.onnx_module.ONNXModel.data_type"><code class="docutils literal notranslate"><span class="pre">ONNXModel.data_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.onnx_module.ONNXModel.predict"><code class="docutils literal notranslate"><span class="pre">ONNXModel.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id58"><code class="docutils literal notranslate"><span class="pre">ONNXModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.onnx_module.ONNXModule"><code class="docutils literal notranslate"><span class="pre">ONNXModule</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.organoids">pyorganoid.organoids module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.organoids.ChemotaxisOrganoid"><code class="docutils literal notranslate"><span class="pre">ChemotaxisOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.organoids.DifferentiationOrganoid"><code class="docutils literal notranslate"><span class="pre">DifferentiationOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.organoids.GeneRegulationOrganoid"><code class="docutils literal notranslate"><span class="pre">GeneRegulationOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.organoids.GrowthShrinkageOrganoid"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.organoids.ImmuneResponseOrganoid"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.organoids.MetabolicOrganoid"><code class="docutils literal notranslate"><span class="pre">MetabolicOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.organoids.SpikingNeuronOrganoid"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.organoids.SynapticPlasticityOrganoid"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityOrganoid</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.simulation">pyorganoid.simulation module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.ParallelScheduler"><code class="docutils literal notranslate"><span class="pre">ParallelScheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.ParallelScheduler.organoid"><code class="docutils literal notranslate"><span class="pre">ParallelScheduler.organoid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.ParallelScheduler.simulate"><code class="docutils literal notranslate"><span class="pre">ParallelScheduler.simulate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id59"><code class="docutils literal notranslate"><span class="pre">ParallelScheduler.simulate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.PriorityScheduler"><code class="docutils literal notranslate"><span class="pre">PriorityScheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.PriorityScheduler.organoid"><code class="docutils literal notranslate"><span class="pre">PriorityScheduler.organoid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.PriorityScheduler.priorities"><code class="docutils literal notranslate"><span class="pre">PriorityScheduler.priorities</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.PriorityScheduler.simulate"><code class="docutils literal notranslate"><span class="pre">PriorityScheduler.simulate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id60"><code class="docutils literal notranslate"><span class="pre">PriorityScheduler.simulate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.Scheduler"><code class="docutils literal notranslate"><span class="pre">Scheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.Scheduler.organoid"><code class="docutils literal notranslate"><span class="pre">Scheduler.organoid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.Scheduler.simulate"><code class="docutils literal notranslate"><span class="pre">Scheduler.simulate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id61"><code class="docutils literal notranslate"><span class="pre">Scheduler.simulate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.StochasticScheduler"><code class="docutils literal notranslate"><span class="pre">StochasticScheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.StochasticScheduler.organoid"><code class="docutils literal notranslate"><span class="pre">StochasticScheduler.organoid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.simulation.StochasticScheduler.simulate"><code class="docutils literal notranslate"><span class="pre">StochasticScheduler.simulate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id62"><code class="docutils literal notranslate"><span class="pre">StochasticScheduler.simulate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.sklearn_module">pyorganoid.sklearn_module module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.sklearn_module.SklearnModel"><code class="docutils literal notranslate"><span class="pre">SklearnModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.sklearn_module.SklearnModel.model"><code class="docutils literal notranslate"><span class="pre">SklearnModel.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.sklearn_module.SklearnModel.input_shape"><code class="docutils literal notranslate"><span class="pre">SklearnModel.input_shape</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.sklearn_module.SklearnModel.predict"><code class="docutils literal notranslate"><span class="pre">SklearnModel.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id63"><code class="docutils literal notranslate"><span class="pre">SklearnModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.sklearn_module.SklearnModule"><code class="docutils literal notranslate"><span class="pre">SklearnModule</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.tf_module">pyorganoid.tf_module module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.tf_module.TFModel"><code class="docutils literal notranslate"><span class="pre">TFModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.tf_module.TFModel.model"><code class="docutils literal notranslate"><span class="pre">TFModel.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.tf_module.TFModel.input_shape"><code class="docutils literal notranslate"><span class="pre">TFModel.input_shape</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.tf_module.TFModel.predict"><code class="docutils literal notranslate"><span class="pre">TFModel.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id64"><code class="docutils literal notranslate"><span class="pre">TFModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.tf_module.TFModule"><code class="docutils literal notranslate"><span class="pre">TFModule</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.torch_module">pyorganoid.torch_module module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.torch_module.TorchModel"><code class="docutils literal notranslate"><span class="pre">TorchModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.torch_module.TorchModel.model"><code class="docutils literal notranslate"><span class="pre">TorchModel.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.torch_module.TorchModel.input_shape"><code class="docutils literal notranslate"><span class="pre">TorchModel.input_shape</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.torch_module.TorchModel.predict"><code class="docutils literal notranslate"><span class="pre">TorchModel.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id65"><code class="docutils literal notranslate"><span class="pre">TorchModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.torch_module.TorchModule"><code class="docutils literal notranslate"><span class="pre">TorchModule</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid.utils">pyorganoid.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.utils.generate_random_position"><code class="docutils literal notranslate"><span class="pre">generate_random_position()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyorganoid.html#module-pyorganoid">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.Agent"><code class="docutils literal notranslate"><span class="pre">Agent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Agent.position"><code class="docutils literal notranslate"><span class="pre">Agent.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Agent.modules"><code class="docutils literal notranslate"><span class="pre">Agent.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Agent.add_module"><code class="docutils literal notranslate"><span class="pre">Agent.add_module()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Agent.update"><code class="docutils literal notranslate"><span class="pre">Agent.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id66"><code class="docutils literal notranslate"><span class="pre">Agent.add_module()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id67"><code class="docutils literal notranslate"><span class="pre">Agent.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.AgentContainer"><code class="docutils literal notranslate"><span class="pre">AgentContainer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.AgentContainer.agents"><code class="docutils literal notranslate"><span class="pre">AgentContainer.agents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.AgentContainer.add_agent"><code class="docutils literal notranslate"><span class="pre">AgentContainer.add_agent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.AgentContainer.get_agents"><code class="docutils literal notranslate"><span class="pre">AgentContainer.get_agents()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.AgentContainer.get_agent_by_id"><code class="docutils literal notranslate"><span class="pre">AgentContainer.get_agent_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id68"><code class="docutils literal notranslate"><span class="pre">AgentContainer.add_agent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id69"><code class="docutils literal notranslate"><span class="pre">AgentContainer.get_agent_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id70"><code class="docutils literal notranslate"><span class="pre">AgentContainer.get_agents()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.AgentHandle"><code class="docutils literal notranslate"><span class="pre">AgentHandle</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.AgentHandle.agent_id"><code class="docutils literal notranslate"><span class="pre">AgentHandle.agent_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.AgentHandle.container"><code class="docutils literal notranslate"><span class="pre">AgentHandle.container</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.AgentHandle.get_agent"><code class="docutils literal notranslate"><span class="pre">AgentHandle.get_agent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id71"><code class="docutils literal notranslate"><span class="pre">AgentHandle.get_agent()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.BaseMLModel"><code class="docutils literal notranslate"><span class="pre">BaseMLModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.BaseMLModel.predict"><code class="docutils literal notranslate"><span class="pre">BaseMLModel.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id72"><code class="docutils literal notranslate"><span class="pre">BaseMLModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.BaseModule"><code class="docutils literal notranslate"><span class="pre">BaseModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.BaseModule.run"><code class="docutils literal notranslate"><span class="pre">BaseModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id73"><code class="docutils literal notranslate"><span class="pre">BaseModule.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.Cell"><code class="docutils literal notranslate"><span class="pre">Cell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Cell.position"><code class="docutils literal notranslate"><span class="pre">Cell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Cell.modules"><code class="docutils literal notranslate"><span class="pre">Cell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Cell.history"><code class="docutils literal notranslate"><span class="pre">Cell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Cell.input_data_func"><code class="docutils literal notranslate"><span class="pre">Cell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Cell.add_module"><code class="docutils literal notranslate"><span class="pre">Cell.add_module()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Cell.update"><code class="docutils literal notranslate"><span class="pre">Cell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Cell.get_history"><code class="docutils literal notranslate"><span class="pre">Cell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Cell.default_input_data_func"><code class="docutils literal notranslate"><span class="pre">Cell.default_input_data_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Cell.get_input_data"><code class="docutils literal notranslate"><span class="pre">Cell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id74"><code class="docutils literal notranslate"><span class="pre">Cell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id75"><code class="docutils literal notranslate"><span class="pre">Cell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id76"><code class="docutils literal notranslate"><span class="pre">Cell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemicalGradientEnvironment"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemicalGradientEnvironment.conditions"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemicalGradientEnvironment.dimensions"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemicalGradientEnvironment.size"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemicalGradientEnvironment.gradient_func"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.gradient_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemicalGradientEnvironment.update"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemicalGradientEnvironment.add_condition"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemicalGradientEnvironment.get_concentration"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.get_concentration()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id77"><code class="docutils literal notranslate"><span class="pre">ChemicalGradientEnvironment.get_concentration()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotacticCell"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotacticCell.position"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotacticCell.modules"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotacticCell.history"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotacticCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotacticCell.chemotactic_gradient"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.chemotactic_gradient</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotacticCell.update"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotacticCell.get_history"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotacticCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotacticCell.move_towards_gradient"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.move_towards_gradient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotacticCell.get_chemotactic_gradient"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.get_chemotactic_gradient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id78"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.get_chemotactic_gradient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id79"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.move_towards_gradient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id80"><code class="docutils literal notranslate"><span class="pre">ChemotacticCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotaxisModule"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotaxisModule.ml_model"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotaxisModule.run"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotaxisModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotaxisModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id81"><code class="docutils literal notranslate"><span class="pre">ChemotaxisModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.ChemotaxisOrganoid"><code class="docutils literal notranslate"><span class="pre">ChemotaxisOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiatingCell"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiatingCell.position"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiatingCell.modules"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiatingCell.history"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiatingCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiatingCell.state"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.state</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiatingCell.update"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiatingCell.get_history"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiatingCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiatingCell.differentiate"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.differentiate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiatingCell.get_state"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.get_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id82"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.differentiate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id83"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.get_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id84"><code class="docutils literal notranslate"><span class="pre">DifferentiatingCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiationModule"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiationModule.ml_model"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiationModule.run"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiationModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiationModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id85"><code class="docutils literal notranslate"><span class="pre">DifferentiationModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.DifferentiationOrganoid"><code class="docutils literal notranslate"><span class="pre">DifferentiationOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.ElectricFieldEnvironment"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ElectricFieldEnvironment.conditions"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ElectricFieldEnvironment.dimensions"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ElectricFieldEnvironment.size"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ElectricFieldEnvironment.field_strength"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.field_strength</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ElectricFieldEnvironment.update"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ElectricFieldEnvironment.add_condition"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ElectricFieldEnvironment.get_field_effect"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.get_field_effect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id86"><code class="docutils literal notranslate"><span class="pre">ElectricFieldEnvironment.get_field_effect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.Environment"><code class="docutils literal notranslate"><span class="pre">Environment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Environment.conditions"><code class="docutils literal notranslate"><span class="pre">Environment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Environment.dimensions"><code class="docutils literal notranslate"><span class="pre">Environment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Environment.size"><code class="docutils literal notranslate"><span class="pre">Environment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Environment.update"><code class="docutils literal notranslate"><span class="pre">Environment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Environment.add_condition"><code class="docutils literal notranslate"><span class="pre">Environment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id87"><code class="docutils literal notranslate"><span class="pre">Environment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id88"><code class="docutils literal notranslate"><span class="pre">Environment.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell.position"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell.modules"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell.history"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell.gene_expression_level"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.gene_expression_level</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell.regulation_variance"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.regulation_variance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell.update"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell.get_history"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell.regulate_genes"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.regulate_genes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationCell.get_gene_expression_level"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.get_gene_expression_level()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id89"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.get_gene_expression_level()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id90"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.regulate_genes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id91"><code class="docutils literal notranslate"><span class="pre">GeneRegulationCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationModule"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationModule.ml_model"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationModule.run"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id92"><code class="docutils literal notranslate"><span class="pre">GeneRegulationModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.GeneRegulationOrganoid"><code class="docutils literal notranslate"><span class="pre">GeneRegulationOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.GradientEnvironment"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GradientEnvironment.conditions"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GradientEnvironment.dimensions"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GradientEnvironment.size"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GradientEnvironment.gradient_func"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.gradient_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GradientEnvironment.update"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GradientEnvironment.add_condition"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GradientEnvironment.get_gradient"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.get_gradient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id93"><code class="docutils literal notranslate"><span class="pre">GradientEnvironment.get_gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell.position"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell.modules"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell.history"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell.volume"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.volume</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell.update"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell.get_history"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell.grow"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.grow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell.shrink"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.shrink()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageCell.get_volume"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.get_volume()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id94"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.get_volume()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id95"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.grow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id96"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.shrink()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id97"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageModule"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageModule.ml_model"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageModule.growth_amount"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.growth_amount</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageModule.growth_variance"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.growth_variance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageModule.prediction_threshold"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.prediction_threshold</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageModule.run"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id98"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.GrowthShrinkageOrganoid"><code class="docutils literal notranslate"><span class="pre">GrowthShrinkageOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell"><code class="docutils literal notranslate"><span class="pre">ImmuneCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell.position"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell.modules"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell.history"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell.active"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.active</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell.update"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell.get_history"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell.activate"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.activate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell.deactivate"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.deactivate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneCell.is_active"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.is_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id99"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.activate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id100"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.deactivate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id101"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.is_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id102"><code class="docutils literal notranslate"><span class="pre">ImmuneCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneResponseModule"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneResponseModule.ml_model"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneResponseModule.run"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneResponseModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneResponseModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id103"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.ImmuneResponseOrganoid"><code class="docutils literal notranslate"><span class="pre">ImmuneResponseOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell"><code class="docutils literal notranslate"><span class="pre">MetabolicCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell.position"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell.modules"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell.history"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell.metabolism_rate"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.metabolism_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell.energy"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.energy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell.update"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell.get_history"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell.metabolize"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.metabolize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicCell.get_energy"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.get_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id104"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.get_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id105"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.metabolize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id106"><code class="docutils literal notranslate"><span class="pre">MetabolicCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicModule"><code class="docutils literal notranslate"><span class="pre">MetabolicModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicModule.ml_model"><code class="docutils literal notranslate"><span class="pre">MetabolicModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicModule.run"><code class="docutils literal notranslate"><span class="pre">MetabolicModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">MetabolicModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">MetabolicModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id107"><code class="docutils literal notranslate"><span class="pre">MetabolicModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.MetabolicOrganoid"><code class="docutils literal notranslate"><span class="pre">MetabolicOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.ONNXModel"><code class="docutils literal notranslate"><span class="pre">ONNXModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ONNXModel.model"><code class="docutils literal notranslate"><span class="pre">ONNXModel.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ONNXModel.input_shape"><code class="docutils literal notranslate"><span class="pre">ONNXModel.input_shape</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ONNXModel.data_type"><code class="docutils literal notranslate"><span class="pre">ONNXModel.data_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ONNXModel.predict"><code class="docutils literal notranslate"><span class="pre">ONNXModel.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id108"><code class="docutils literal notranslate"><span class="pre">ONNXModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.ONNXModule"><code class="docutils literal notranslate"><span class="pre">ONNXModule</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.Organoid"><code class="docutils literal notranslate"><span class="pre">Organoid</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Organoid.environment"><code class="docutils literal notranslate"><span class="pre">Organoid.environment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Organoid.agents"><code class="docutils literal notranslate"><span class="pre">Organoid.agents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Organoid.add_agent"><code class="docutils literal notranslate"><span class="pre">Organoid.add_agent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Organoid.get_cells"><code class="docutils literal notranslate"><span class="pre">Organoid.get_cells()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id109"><code class="docutils literal notranslate"><span class="pre">Organoid.add_agent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id110"><code class="docutils literal notranslate"><span class="pre">Organoid.get_cells()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Organoid.plot_organoid"><code class="docutils literal notranslate"><span class="pre">Organoid.plot_organoid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Organoid.plot_simulation_history"><code class="docutils literal notranslate"><span class="pre">Organoid.plot_simulation_history()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.ParallelScheduler"><code class="docutils literal notranslate"><span class="pre">ParallelScheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ParallelScheduler.organoid"><code class="docutils literal notranslate"><span class="pre">ParallelScheduler.organoid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.ParallelScheduler.simulate"><code class="docutils literal notranslate"><span class="pre">ParallelScheduler.simulate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id111"><code class="docutils literal notranslate"><span class="pre">ParallelScheduler.simulate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.PriorityScheduler"><code class="docutils literal notranslate"><span class="pre">PriorityScheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.PriorityScheduler.organoid"><code class="docutils literal notranslate"><span class="pre">PriorityScheduler.organoid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.PriorityScheduler.priorities"><code class="docutils literal notranslate"><span class="pre">PriorityScheduler.priorities</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.PriorityScheduler.simulate"><code class="docutils literal notranslate"><span class="pre">PriorityScheduler.simulate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id112"><code class="docutils literal notranslate"><span class="pre">PriorityScheduler.simulate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.Scheduler"><code class="docutils literal notranslate"><span class="pre">Scheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Scheduler.organoid"><code class="docutils literal notranslate"><span class="pre">Scheduler.organoid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Scheduler.simulate"><code class="docutils literal notranslate"><span class="pre">Scheduler.simulate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id113"><code class="docutils literal notranslate"><span class="pre">Scheduler.simulate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.SklearnModel"><code class="docutils literal notranslate"><span class="pre">SklearnModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SklearnModel.model"><code class="docutils literal notranslate"><span class="pre">SklearnModel.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SklearnModel.input_shape"><code class="docutils literal notranslate"><span class="pre">SklearnModel.input_shape</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SklearnModel.predict"><code class="docutils literal notranslate"><span class="pre">SklearnModel.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id114"><code class="docutils literal notranslate"><span class="pre">SklearnModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.SklearnModule"><code class="docutils literal notranslate"><span class="pre">SklearnModule</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell.position"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell.modules"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell.history"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell.membrane_potential"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.membrane_potential</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell.threshold"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.threshold</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell.update"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell.get_history"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell.spike"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.spike()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronCell.default_input_data_func"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.default_input_data_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id115"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.spike()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id116"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronModule"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronModule.ml_model"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule.ml_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronModule.run"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronModule.collect_input_data"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule.collect_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id117"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronModule.apply_prediction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.SpikingNeuronOrganoid"><code class="docutils literal notranslate"><span class="pre">SpikingNeuronOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.StochasticEnvironment"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.StochasticEnvironment.conditions"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.StochasticEnvironment.dimensions"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.StochasticEnvironment.size"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.StochasticEnvironment.noise_level"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.noise_level</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.StochasticEnvironment.update"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.StochasticEnvironment.add_condition"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.StochasticEnvironment.get_noise"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.get_noise()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id118"><code class="docutils literal notranslate"><span class="pre">StochasticEnvironment.get_noise()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.StochasticScheduler"><code class="docutils literal notranslate"><span class="pre">StochasticScheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.StochasticScheduler.organoid"><code class="docutils literal notranslate"><span class="pre">StochasticScheduler.organoid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.StochasticScheduler.simulate"><code class="docutils literal notranslate"><span class="pre">StochasticScheduler.simulate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id119"><code class="docutils literal notranslate"><span class="pre">StochasticScheduler.simulate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.Synapse"><code class="docutils literal notranslate"><span class="pre">Synapse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Synapse.pre_neuron"><code class="docutils literal notranslate"><span class="pre">Synapse.pre_neuron</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Synapse.post_neuron"><code class="docutils literal notranslate"><span class="pre">Synapse.post_neuron</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Synapse.weight"><code class="docutils literal notranslate"><span class="pre">Synapse.weight</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.Synapse.transmit"><code class="docutils literal notranslate"><span class="pre">Synapse.transmit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityCell"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityCell.position"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityCell.modules"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityCell.history"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.history</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityCell.input_data_func"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.input_data_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityCell.synapses"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.synapses</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityCell.update"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityCell.get_history"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.get_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityCell.get_input_data"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityCell.add_synapse"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.add_synapse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityCell.get_synapses"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.get_synapses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id120"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.add_synapse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id121"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.get_synapses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id122"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityCell.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityModule"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityModule.synapse"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule.synapse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityModule.learning_rate"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule.learning_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityModule.run"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityModule.apply_prediction"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule.apply_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id123"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityModule.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.SynapticPlasticityOrganoid"><code class="docutils literal notranslate"><span class="pre">SynapticPlasticityOrganoid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.TFModel"><code class="docutils literal notranslate"><span class="pre">TFModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TFModel.model"><code class="docutils literal notranslate"><span class="pre">TFModel.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TFModel.input_shape"><code class="docutils literal notranslate"><span class="pre">TFModel.input_shape</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TFModel.predict"><code class="docutils literal notranslate"><span class="pre">TFModel.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id124"><code class="docutils literal notranslate"><span class="pre">TFModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.TFModule"><code class="docutils literal notranslate"><span class="pre">TFModule</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.TemperatureEnvironment"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TemperatureEnvironment.conditions"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.conditions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TemperatureEnvironment.dimensions"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.dimensions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TemperatureEnvironment.size"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TemperatureEnvironment.temperature"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.temperature</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TemperatureEnvironment.temperature_range"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.temperature_range</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TemperatureEnvironment.update"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TemperatureEnvironment.add_condition"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.add_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TemperatureEnvironment.get_temperature"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.get_temperature()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TemperatureEnvironment.set_temperature"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.set_temperature()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id125"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.get_temperature()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id126"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.set_temperature()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id127"><code class="docutils literal notranslate"><span class="pre">TemperatureEnvironment.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.TorchModel"><code class="docutils literal notranslate"><span class="pre">TorchModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TorchModel.model"><code class="docutils literal notranslate"><span class="pre">TorchModel.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TorchModel.input_shape"><code class="docutils literal notranslate"><span class="pre">TorchModel.input_shape</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#pyorganoid.TorchModel.predict"><code class="docutils literal notranslate"><span class="pre">TorchModel.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyorganoid.html#id128"><code class="docutils literal notranslate"><span class="pre">TorchModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.TorchModule"><code class="docutils literal notranslate"><span class="pre">TorchModule</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyorganoid.html#pyorganoid.generate_random_position"><code class="docutils literal notranslate"><span class="pre">generate_random_position()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to PyOrganoid’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pyorganoid.html" class="btn btn-neutral float-right" title="pyorganoid package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Daniel Szelogowski.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

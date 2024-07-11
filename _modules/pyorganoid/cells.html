@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyorganoid.cells &mdash; PyOrganoid 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PyOrganoid
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">pyorganoid</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PyOrganoid</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyorganoid.cells</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyorganoid.cells</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Cell</span>
+
+
+<div class="viewcode-block" id="SpikingNeuronCell">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SpikingNeuronCell">[docs]</a>
+<span class="k">class</span> <span class="nc">SpikingNeuronCell</span><span class="p">(</span><span class="n">Cell</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple spiking neuron cell model (e.g., a Leaky Integrate-and-Fire neuron).</span>
+<span class="sd">    The membrane potential is reset to zero after spiking.</span>
+<span class="sd">    It is a subclass of the base Cell class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell.</span>
+<span class="sd">    threshold : float, optional</span>
+<span class="sd">        The threshold for spiking. Default is 1.0.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the neuron. Default is None.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell in the environment.</span>
+<span class="sd">    modules : list</span>
+<span class="sd">        List of modules that define the behavior of the cell.</span>
+<span class="sd">    history : list</span>
+<span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function</span>
+<span class="sd">        The function to generate input data for the neuron.</span>
+<span class="sd">    membrane_potential : float</span>
+<span class="sd">        The membrane potential of the neuron.</span>
+<span class="sd">    threshold : float</span>
+<span class="sd">        The threshold for spiking.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    update()</span>
+<span class="sd">        Update the cell&#39;s state.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the neuron.</span>
+<span class="sd">    spike(verbose=False)</span>
+<span class="sd">        Spike the neuron.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_input_data_func</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+
+<div class="viewcode-block" id="SpikingNeuronCell.spike">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.spike">[docs]</a>
+    <span class="k">def</span> <span class="nf">spike</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Spike the neuron. The membrane potential is reset to zero after spiking.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        verbose : bool, optional</span>
+<span class="sd">            Whether to print verbose output. Default is False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Reset potential after spiking</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Neuron at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="si">}</span><span class="s2"> spiked!&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SpikingNeuronCell.update">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the cell&#39;s state. Record the membrane potential and spike if it exceeds the threshold.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">membrane_potential</span><span class="p">)</span>  <span class="c1"># Record the membrane potential</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spike</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SpikingNeuronCell.default_input_data_func">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.default_input_data_func">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">default_input_data_func</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default input data function based on position.</span>
+<span class="sd">        Simply returns a list of 10 input values (this should be overridden by providing an input data function).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            List of input data values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>  <span class="c1"># 10 input values</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="GrowthShrinkageCell">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell">[docs]</a>
+<span class="k">class</span> <span class="nc">GrowthShrinkageCell</span><span class="p">(</span><span class="n">Cell</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple cell model that grows and shrinks based on a volume parameter (e.g., in response to nutrient availability).</span>
+<span class="sd">    It is a subclass of the base Cell class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell.</span>
+<span class="sd">    initial_volume : float, optional</span>
+<span class="sd">        The initial volume of the cell. Default is 1.0.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell in the environment.</span>
+<span class="sd">    modules : list</span>
+<span class="sd">        List of modules that define the behavior of the cell.</span>
+<span class="sd">    history : list</span>
+<span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Defaults to the get_volume method.</span>
+<span class="sd">    volume : float</span>
+<span class="sd">        The volume of the cell.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    update()</span>
+<span class="sd">        Update the cell&#39;s state.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
+<span class="sd">    grow(amount)</span>
+<span class="sd">        Grow the cell by a specified amount.</span>
+<span class="sd">    shrink(amount)</span>
+<span class="sd">        Shrink the cell by a specified amount.</span>
+<span class="sd">    get_volume()</span>
+<span class="sd">        Get the volume of the cell.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">initial_volume</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_volume</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">initial_volume</span>
+
+<div class="viewcode-block" id="GrowthShrinkageCell.update">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the cell&#39;s state based on its volume.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">volume</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GrowthShrinkageCell.grow">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.grow">[docs]</a>
+    <span class="k">def</span> <span class="nf">grow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Grow the cell by a specified amount.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        amount : float</span>
+<span class="sd">            The amount to grow the cell by.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">+=</span> <span class="n">amount</span></div>
+
+
+<div class="viewcode-block" id="GrowthShrinkageCell.shrink">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.shrink">[docs]</a>
+    <span class="k">def</span> <span class="nf">shrink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shrink the cell by a specified amount.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        amount : float</span>
+<span class="sd">            The amount to shrink the cell by.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">-=</span> <span class="n">amount</span></div>
+
+
+<div class="viewcode-block" id="GrowthShrinkageCell.get_volume">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.get_volume">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the current volume of the cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The volume of the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DifferentiatingCell">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.DifferentiatingCell">[docs]</a>
+<span class="k">class</span> <span class="nc">DifferentiatingCell</span><span class="p">(</span><span class="n">Cell</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple cell model that can differentiate into different states (e.g., an undifferentiated stem cell).</span>
+<span class="sd">    It is a subclass of the base Cell class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell.</span>
+<span class="sd">    state : str, optional</span>
+<span class="sd">        The initial state of the cell. Default is &#39;undifferentiated&#39;.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell in the environment.</span>
+<span class="sd">    modules : list</span>
+<span class="sd">        List of modules that define the behavior of the cell.</span>
+<span class="sd">    history : list</span>
+<span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
+<span class="sd">    state : str</span>
+<span class="sd">        The state of the cell.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    update()</span>
+<span class="sd">        Update the cell&#39;s state.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
+<span class="sd">    differentiate(new_state)</span>
+<span class="sd">        Differentiate the cell into a new state.</span>
+<span class="sd">    get_state()</span>
+<span class="sd">        Get the state of the cell.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s1">&#39;undifferentiated&#39;</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
+
+<div class="viewcode-block" id="DifferentiatingCell.update">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.DifferentiatingCell.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the cell&#39;s state based on its current state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DifferentiatingCell.differentiate">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.DifferentiatingCell.differentiate">[docs]</a>
+    <span class="k">def</span> <span class="nf">differentiate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Differentiate the cell into a new state.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        new_state : str</span>
+<span class="sd">            The new state of the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">new_state</span></div>
+
+
+<div class="viewcode-block" id="DifferentiatingCell.get_state">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.DifferentiatingCell.get_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the current state of the cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The state of the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ChemotacticCell">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.ChemotacticCell">[docs]</a>
+<span class="k">class</span> <span class="nc">ChemotacticCell</span><span class="p">(</span><span class="n">Cell</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple cell model that can move towards a chemotactic gradient (e.g., in response to a chemical signal).</span>
+<span class="sd">    It is a subclass of the base Cell class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell in the environment.</span>
+<span class="sd">    modules : list</span>
+<span class="sd">        List of modules that define the behavior of the cell.</span>
+<span class="sd">    history : list</span>
+<span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
+<span class="sd">    chemotactic_gradient : float</span>
+<span class="sd">        The chemotactic gradient for the cell.</span>
+<span class="sd">        Positive values indicate movement towards the gradient.</span>
+<span class="sd">        Negative values indicate movement away from the gradient.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    update()</span>
+<span class="sd">        Update the cell&#39;s state.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
+<span class="sd">    move_towards_gradient(gradient)</span>
+<span class="sd">        Move the cell towards the specified gradient.</span>
+<span class="sd">    get_chemotactic_gradient()</span>
+<span class="sd">        Get the chemotactic gradient of the cell.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_chemotactic_gradient</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chemotactic_gradient</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<div class="viewcode-block" id="ChemotacticCell.update">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.ChemotacticCell.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the cell&#39;s state based on the chemotactic gradient.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chemotactic_gradient</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ChemotacticCell.move_towards_gradient">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.ChemotacticCell.move_towards_gradient">[docs]</a>
+    <span class="k">def</span> <span class="nf">move_towards_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gradient</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Move the cell towards the specified gradient.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        gradient : float</span>
+<span class="sd">            The gradient to move towards.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">+=</span> <span class="n">gradient</span></div>
+
+
+<div class="viewcode-block" id="ChemotacticCell.get_chemotactic_gradient">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.ChemotacticCell.get_chemotactic_gradient">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_chemotactic_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the chemotactic gradient of the cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The chemotactic gradient of the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">chemotactic_gradient</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ImmuneCell">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.ImmuneCell">[docs]</a>
+<span class="k">class</span> <span class="nc">ImmuneCell</span><span class="p">(</span><span class="n">Cell</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple immune cell model that can be activated or deactivated (e.g., in response to an infection).</span>
+<span class="sd">    It is a subclass of the base Cell class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell.</span>
+<span class="sd">    active : bool, optional</span>
+<span class="sd">        Whether the cell is initially active. Default is False.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell in the environment.</span>
+<span class="sd">    modules : list</span>
+<span class="sd">        List of modules that define the behavior of the cell.</span>
+<span class="sd">    history : list</span>
+<span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
+<span class="sd">    active : bool</span>
+<span class="sd">        Whether the cell is currently active.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    update()</span>
+<span class="sd">        Update the cell&#39;s state.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
+<span class="sd">    activate()</span>
+<span class="sd">        Activate the cell.</span>
+<span class="sd">    deactivate()</span>
+<span class="sd">        Deactivate the cell.</span>
+<span class="sd">    is_active()</span>
+<span class="sd">        Check if the cell is currently active or not.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="n">active</span>
+
+<div class="viewcode-block" id="ImmuneCell.update">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.ImmuneCell.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the cell&#39;s state based on its activation status.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">active</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ImmuneCell.activate">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.ImmuneCell.activate">[docs]</a>
+    <span class="k">def</span> <span class="nf">activate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Activate the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="ImmuneCell.deactivate">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.ImmuneCell.deactivate">[docs]</a>
+    <span class="k">def</span> <span class="nf">deactivate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deactivate the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="ImmuneCell.is_active">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.ImmuneCell.is_active">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if the cell is currently active or not.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True if the cell is active, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">active</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SynapticPlasticityCell">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell">[docs]</a>
+<span class="k">class</span> <span class="nc">SynapticPlasticityCell</span><span class="p">(</span><span class="n">Cell</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple cell model that can form synapses with other cells and transmit signals between them.</span>
+<span class="sd">    The cells are connected by synapses that can change their strength based on the timing of spikes (e.g., STDP).</span>
+<span class="sd">    It is a subclass of the base Cell class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell.</span>
+<span class="sd">    initial_synapses : list, optional</span>
+<span class="sd">        List of initial synapses for the cell. Default is None.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell in the environment.</span>
+<span class="sd">    modules : list</span>
+<span class="sd">        List of modules that define the behavior of the cell.</span>
+<span class="sd">    history : list</span>
+<span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
+<span class="sd">    synapses : list</span>
+<span class="sd">        List of synapses connected to the cell.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    update()</span>
+<span class="sd">        Update the cell&#39;s state.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
+<span class="sd">    add_synapse(synapse)</span>
+<span class="sd">        Add a synapse to the cell.</span>
+<span class="sd">    get_synapses()</span>
+<span class="sd">        Get the synapses connected to the cell.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">initial_synapses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_synapses</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">synapses</span> <span class="o">=</span> <span class="n">initial_synapses</span> <span class="k">if</span> <span class="n">initial_synapses</span> <span class="k">else</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="SynapticPlasticityCell.update">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">historical_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the cell&#39;s state based on its synapses and historical value.</span>
+<span class="sd">        Transmit signals between connected cells.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        historical_value : any, optional</span>
+<span class="sd">            The historical value to append to the cell&#39;s history. Default is None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">historical_value</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">synapse</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">synapses</span><span class="p">:</span>
+            <span class="n">synapse</span><span class="o">.</span><span class="n">transmit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SynapticPlasticityCell.add_synapse">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.add_synapse">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_synapse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">synapse</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a synapse to the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">synapses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">synapse</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SynapticPlasticityCell.get_synapses">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.get_synapses">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_synapses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the synapses connected to the cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            List of synapses connected to the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">synapses</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MetabolicCell">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.MetabolicCell">[docs]</a>
+<span class="k">class</span> <span class="nc">MetabolicCell</span><span class="p">(</span><span class="n">Cell</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple cell model that metabolizes energy based on a specified rate (e.g., in response to nutrient availability).</span>
+<span class="sd">    It is a subclass of the base Cell class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell.</span>
+<span class="sd">    metabolism_rate : float, optional</span>
+<span class="sd">        The rate at which the cell metabolizes energy. Default is 1.0.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell in the environment.</span>
+<span class="sd">    modules : list</span>
+<span class="sd">        List of modules that define the behavior of the cell.</span>
+<span class="sd">    history : list</span>
+<span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
+<span class="sd">    metabolism_rate : float</span>
+<span class="sd">        The rate at which the cell metabolizes energy.</span>
+<span class="sd">    energy : float</span>
+<span class="sd">        The energy level of the cell.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    update()</span>
+<span class="sd">        Update the cell&#39;s state.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
+<span class="sd">    metabolize(factor)</span>
+<span class="sd">        Metabolize energy based on a specified factor.</span>
+<span class="sd">    get_energy()</span>
+<span class="sd">        Get the energy level of the cell.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">metabolism_rate</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_energy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metabolism_rate</span> <span class="o">=</span> <span class="n">metabolism_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mf">100.0</span>
+
+<div class="viewcode-block" id="MetabolicCell.update">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.MetabolicCell.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the cell&#39;s state based on its energy level.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MetabolicCell.metabolize">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.MetabolicCell.metabolize">[docs]</a>
+    <span class="k">def</span> <span class="nf">metabolize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Metabolize energy based on a specified factor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">*=</span> <span class="n">factor</span></div>
+
+
+<div class="viewcode-block" id="MetabolicCell.get_energy">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.MetabolicCell.get_energy">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the energy level of the cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The energy level of the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="GeneRegulationCell">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GeneRegulationCell">[docs]</a>
+<span class="k">class</span> <span class="nc">GeneRegulationCell</span><span class="p">(</span><span class="n">Cell</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple cell model that regulates gene expression levels based on external factors (e.g., signaling molecules).</span>
+<span class="sd">    It is a subclass of the base Cell class.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell.</span>
+<span class="sd">    gene_expression_level : float, optional</span>
+<span class="sd">        The initial gene expression level. Default is 1.0.</span>
+<span class="sd">    regulation_variance : float, optional</span>
+<span class="sd">        The maximum variance in the regulation of gene expression level. Default is 0.05.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    position : {tuple, int}</span>
+<span class="sd">        The position of the cell in the environment.</span>
+<span class="sd">    modules : list</span>
+<span class="sd">        List of modules that define the behavior of the cell.</span>
+<span class="sd">    history : list</span>
+<span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
+<span class="sd">    gene_expression_level : float</span>
+<span class="sd">        The gene expression level of the cell.</span>
+<span class="sd">    regulation_variance : float</span>
+<span class="sd">        The maximum variance in the regulation of gene expression level.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    update()</span>
+<span class="sd">        Update the cell&#39;s state.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
+<span class="sd">    regulate_genes(regulation_factor)</span>
+<span class="sd">        Regulate the cell&#39;s gene expression level by a specified factor.</span>
+<span class="sd">    get_gene_expression_level()</span>
+<span class="sd">        Get the gene expression level of the cell.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">gene_expression_level</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">regulation_variance</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gene_expression_level</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gene_expression_level</span> <span class="o">=</span> <span class="n">gene_expression_level</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regulation_variance</span> <span class="o">=</span> <span class="n">regulation_variance</span>
+
+<div class="viewcode-block" id="GeneRegulationCell.update">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GeneRegulationCell.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the cell&#39;s state based on its gene expression level.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gene_expression_level</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GeneRegulationCell.regulate_genes">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GeneRegulationCell.regulate_genes">[docs]</a>
+    <span class="k">def</span> <span class="nf">regulate_genes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">regulation_factor</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Regulate the cell&#39;s gene expression level by a specified factor.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        regulation_factor : float</span>
+<span class="sd">            The factor by which to regulate the gene expression level.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gene_expression_level</span> <span class="o">*=</span> <span class="n">regulation_factor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gene_expression_level</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">regulation_variance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">regulation_variance</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GeneRegulationCell.get_gene_expression_level">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GeneRegulationCell.get_gene_expression_level">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_gene_expression_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the gene expression level of the cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The gene expression level of the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gene_expression_level</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Daniel Szelogowski.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
