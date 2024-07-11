@@ -142,6 +142,8 @@
 <span class="sd">    ----------</span>
 <span class="sd">    position : tuple</span>
 <span class="sd">        The position of the cell in the environment.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        The input data function for the cell. Default is None.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -151,6 +153,8 @@
 <span class="sd">        List of modules that define the behavior of the cell.</span>
 <span class="sd">    history : list</span>
 <span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function</span>
+<span class="sd">        The input data function for the cell.</span>
 
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
@@ -160,11 +164,17 @@
 <span class="sd">        Update the cell&#39;s state based on its modules and historical value.</span>
 <span class="sd">    get_history()</span>
 <span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    default_input_data_func()</span>
+<span class="sd">        Default input data function for the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_data_func</span> <span class="o">=</span> <span class="n">input_data_func</span> <span class="k">if</span> <span class="n">input_data_func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> \
+            <span class="k">else</span> <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="p">(</span><span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">())</span><span class="o">.</span><span class="n">throw</span><span class="p">(</span><span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Subclasses should implement this method!&quot;</span><span class="p">))</span>
 
 <div class="viewcode-block" id="Cell.update">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Cell.update">[docs]</a>
@@ -194,6 +204,20 @@
 <span class="sd">            List of historical values for the cell.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span></div>
+
+
+<div class="viewcode-block" id="Cell.get_input_data">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Cell.get_input_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the input data for the neuron.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            List of input data values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_data_func</span><span class="p">(</span><span class="n">_</span><span class="p">)</span></div>
 </div>
 
 
@@ -408,6 +432,65 @@
                 <span class="n">dot</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Graphviz is required to plot the organoid structure.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="Organoid.plot_simulation_history">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.base.Organoid.plot_simulation_history">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_simulation_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">y_label</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">&quot;Time Steps&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">)):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the simulation history of the organoid using Matplotlib.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : str</span>
+<span class="sd">            The title of the plot.</span>
+<span class="sd">        y_label : str</span>
+<span class="sd">            The label for the y-axis.</span>
+<span class="sd">        x_label : str, optional</span>
+<span class="sd">            The label for the x-axis. Default is &quot;Time Steps&quot;.</span>
+<span class="sd">        filename : str, optional</span>
+<span class="sd">            The filename to save the plot as (in PNG format). Default is None (view the image with plt.show()).</span>
+<span class="sd">        dpi : int, optional</span>
+<span class="sd">            The DPI (dots per inch) of the plot. Default is 300.</span>
+<span class="sd">        figsize : tuple, optional</span>
+<span class="sd">            The size of the figure (width, height) in inches. Default is (10, 6).</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ImportError</span>
+<span class="sd">            If Matplotlib is not installed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+            <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+            <span class="k">def</span> <span class="nf">contains_arrays</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;Check if the list contains any numpy arrays.&quot;&quot;&quot;</span>
+                <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">flatten_list</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;Flatten a list containing numpy arrays.&quot;&quot;&quot;</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">item</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">else</span> <span class="n">item</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_cells</span><span class="p">()):</span>
+                <span class="n">history</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">get_history</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">contains_arrays</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
+                    <span class="n">history</span> <span class="o">=</span> <span class="n">flatten_list</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Cell </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_label</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Simulation history plot saved as &quot;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Matplotlib and NumPy are required to plot the simulation history.&quot;</span><span class="p">)</span>
             <span class="k">raise</span> <span class="n">e</span></div>
 </div>
 

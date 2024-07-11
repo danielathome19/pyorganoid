@@ -1,3 +1,4 @@
+import numpy as np
 from .base import Cell
 
 
@@ -24,12 +25,12 @@ class SpikingNeuronCell(Cell):
         List of modules that define the behavior of the cell.
     history : list
         List of historical values for the cell.
+    input_data_func : function
+        The function to generate input data for the neuron.
     membrane_potential : float
         The membrane potential of the neuron.
     threshold : float
         The threshold for spiking.
-    input_data_func : function
-        The function to generate input data for the neuron.
 
     Methods
     -------
@@ -37,18 +38,15 @@ class SpikingNeuronCell(Cell):
         Update the cell's state.
     get_history()
         Get the historical values of the cell.
-    spike(verbose=False)
-        Spike the neuron.
-    default_input_data_func()
-        Default input data function based on position.
     get_input_data()
         Get the input data for the neuron.
+    spike(verbose=False)
+        Spike the neuron.
     """
     def __init__(self, position, threshold=1.0, input_data_func=None):
-        super().__init__(position)
+        super().__init__(position, input_data_func=input_data_func or self.default_input_data_func)
         self.membrane_potential = 0.0
         self.threshold = threshold
-        self.input_data_func = input_data_func or self.default_input_data_func
 
     def spike(self, verbose=False):
         """
@@ -63,6 +61,14 @@ class SpikingNeuronCell(Cell):
         if verbose:
             print(f"Neuron at {self.position} spiked!")
 
+    def update(self):
+        """
+        Update the cell's state. Record the membrane potential and spike if it exceeds the threshold.
+        """
+        super().update(self.membrane_potential)  # Record the membrane potential
+        if self.membrane_potential >= self.threshold:
+            self.spike()
+
     @staticmethod
     def default_input_data_func():
         """
@@ -76,25 +82,6 @@ class SpikingNeuronCell(Cell):
         """
         return [0.5] * 10  # 10 input values
 
-    def get_input_data(self):
-        """
-        Get the input data for the neuron.
-
-        Returns
-        -------
-        list
-            List of input data values.
-        """
-        return self.input_data_func(self)
-
-    def update(self):
-        """
-        Update the cell's state. Record the membrane potential and spike if it exceeds the threshold.
-        """
-        super().update(self.membrane_potential)  # Record the membrane potential
-        if self.membrane_potential >= self.threshold:
-            self.spike()
-
 
 class GrowthShrinkageCell(Cell):
     """
@@ -107,6 +94,8 @@ class GrowthShrinkageCell(Cell):
         The position of the cell.
     initial_volume : float, optional
         The initial volume of the cell. Default is 1.0.
+    input_data_func : function, optional
+        A function to generate input data for the cell. Default is None.
 
     Attributes
     ----------
@@ -116,6 +105,8 @@ class GrowthShrinkageCell(Cell):
         List of modules that define the behavior of the cell.
     history : list
         List of historical values for the cell.
+    input_data_func : function, optional
+        A function to generate input data for the cell. Defaults to the get_volume method.
     volume : float
         The volume of the cell.
 
@@ -125,6 +116,8 @@ class GrowthShrinkageCell(Cell):
         Update the cell's state.
     get_history()
         Get the historical values of the cell.
+    get_input_data()
+        Get the input data for the cell.
     grow(amount)
         Grow the cell by a specified amount.
     shrink(amount)
@@ -132,8 +125,8 @@ class GrowthShrinkageCell(Cell):
     get_volume()
         Get the volume of the cell.
     """
-    def __init__(self, position, initial_volume=1.0):
-        super().__init__(position)
+    def __init__(self, position, initial_volume=1.0, input_data_func=None):
+        super().__init__(position, input_data_func=input_data_func or self.get_volume)
         self.volume = initial_volume
 
     def update(self):
@@ -164,7 +157,7 @@ class GrowthShrinkageCell(Cell):
         """
         self.volume -= amount
 
-    def get_volume(self):
+    def get_volume(self, _=None):
         """
         Get the current volume of the cell.
 
@@ -187,6 +180,8 @@ class DifferentiatingCell(Cell):
         The position of the cell.
     state : str, optional
         The initial state of the cell. Default is 'undifferentiated'.
+    input_data_func : function, optional
+        A function to generate input data for the cell. Default is None.
 
     Attributes
     ----------
@@ -196,6 +191,8 @@ class DifferentiatingCell(Cell):
         List of modules that define the behavior of the cell.
     history : list
         List of historical values for the cell.
+    input_data_func : function, optional
+        A function to generate input data for the cell.
     state : str
         The state of the cell.
 
@@ -205,13 +202,15 @@ class DifferentiatingCell(Cell):
         Update the cell's state.
     get_history()
         Get the historical values of the cell.
+    get_input_data()
+        Get the input data for the cell.
     differentiate(new_state)
         Differentiate the cell into a new state.
     get_state()
         Get the state of the cell.
     """
-    def __init__(self, position, state='undifferentiated'):
-        super().__init__(position)
+    def __init__(self, position, state='undifferentiated', input_data_func=None):
+        super().__init__(position, input_data_func=input_data_func or self.get_state)
         self.state = state
 
     def update(self):
@@ -231,7 +230,7 @@ class DifferentiatingCell(Cell):
         """
         self.state = new_state
 
-    def get_state(self):
+    def get_state(self, _=None):
         """
         Get the current state of the cell.
 
@@ -252,6 +251,8 @@ class ChemotacticCell(Cell):
     ----------
     position : {tuple, int}
         The position of the cell.
+    input_data_func : function, optional
+        A function to generate input data for the cell. Default is None.
 
     Attributes
     ----------
@@ -261,6 +262,8 @@ class ChemotacticCell(Cell):
         List of modules that define the behavior of the cell.
     history : list
         List of historical values for the cell.
+    input_data_func : function, optional
+        A function to generate input data for the cell.
     chemotactic_gradient : float
         The chemotactic gradient for the cell.
         Positive values indicate movement towards the gradient.
@@ -272,13 +275,15 @@ class ChemotacticCell(Cell):
         Update the cell's state.
     get_history()
         Get the historical values of the cell.
+    get_input_data()
+        Get the input data for the cell.
     move_towards_gradient(gradient)
         Move the cell towards the specified gradient.
     get_chemotactic_gradient()
         Get the chemotactic gradient of the cell.
     """
-    def __init__(self, position):
-        super().__init__(position)
+    def __init__(self, position, input_data_func=None):
+        super().__init__(position, input_data_func=input_data_func or self.get_chemotactic_gradient)
         self.chemotactic_gradient = 0.0
 
     def update(self):
@@ -298,7 +303,7 @@ class ChemotacticCell(Cell):
         """
         self.position += gradient
 
-    def get_chemotactic_gradient(self):
+    def get_chemotactic_gradient(self, _=None):
         """
         Get the chemotactic gradient of the cell.
 
@@ -321,6 +326,8 @@ class ImmuneCell(Cell):
         The position of the cell.
     active : bool, optional
         Whether the cell is initially active. Default is False.
+    input_data_func : function, optional
+        A function to generate input data for the cell. Default is None.
 
     Attributes
     ----------
@@ -330,6 +337,8 @@ class ImmuneCell(Cell):
         List of modules that define the behavior of the cell.
     history : list
         List of historical values for the cell.
+    input_data_func : function, optional
+        A function to generate input data for the cell.
     active : bool
         Whether the cell is currently active.
 
@@ -339,6 +348,8 @@ class ImmuneCell(Cell):
         Update the cell's state.
     get_history()
         Get the historical values of the cell.
+    get_input_data()
+        Get the input data for the cell.
     activate()
         Activate the cell.
     deactivate()
@@ -346,8 +357,8 @@ class ImmuneCell(Cell):
     is_active()
         Check if the cell is currently active or not.
     """
-    def __init__(self, position, active=False):
-        super().__init__(position)
+    def __init__(self, position, active=False, input_data_func=None):
+        super().__init__(position, input_data_func=input_data_func or self.is_active)
         self.active = active
 
     def update(self):
@@ -368,7 +379,7 @@ class ImmuneCell(Cell):
         """
         self.active = False
 
-    def is_active(self):
+    def is_active(self, _=None):
         """
         Check if the cell is currently active or not.
 
@@ -392,6 +403,8 @@ class SynapticPlasticityCell(Cell):
         The position of the cell.
     initial_synapses : list, optional
         List of initial synapses for the cell. Default is None.
+    input_data_func : function, optional
+        A function to generate input data for the cell. Default is None.
 
     Attributes
     ----------
@@ -401,6 +414,8 @@ class SynapticPlasticityCell(Cell):
         List of modules that define the behavior of the cell.
     history : list
         List of historical values for the cell.
+    input_data_func : function, optional
+        A function to generate input data for the cell.
     synapses : list
         List of synapses connected to the cell.
 
@@ -408,11 +423,17 @@ class SynapticPlasticityCell(Cell):
     -------
     update()
         Update the cell's state.
+    get_history()
+        Get the historical values of the cell.
+    get_input_data()
+        Get the input data for the cell.
     add_synapse(synapse)
         Add a synapse to the cell.
+    get_synapses()
+        Get the synapses connected to the cell.
     """
-    def __init__(self, position, initial_synapses=None):
-        super().__init__(position)
+    def __init__(self, position, initial_synapses=None, input_data_func=None):
+        super().__init__(position, input_data_func=input_data_func or self.get_synapses)
         self.synapses = initial_synapses if initial_synapses else []
 
     def update(self, historical_value=None):
@@ -435,6 +456,17 @@ class SynapticPlasticityCell(Cell):
         """
         self.synapses.append(synapse)
 
+    def get_synapses(self, _=None):
+        """
+        Get the synapses connected to the cell.
+
+        Returns
+        -------
+        list
+            List of synapses connected to the cell.
+        """
+        return self.synapses
+
 
 class MetabolicCell(Cell):
     """
@@ -447,6 +479,8 @@ class MetabolicCell(Cell):
         The position of the cell.
     metabolism_rate : float, optional
         The rate at which the cell metabolizes energy. Default is 1.0.
+    input_data_func : function, optional
+        A function to generate input data for the cell. Default is None.
 
     Attributes
     ----------
@@ -456,6 +490,8 @@ class MetabolicCell(Cell):
         List of modules that define the behavior of the cell.
     history : list
         List of historical values for the cell.
+    input_data_func : function, optional
+        A function to generate input data for the cell.
     metabolism_rate : float
         The rate at which the cell metabolizes energy.
     energy : float
@@ -465,15 +501,21 @@ class MetabolicCell(Cell):
     -------
     update()
         Update the cell's state.
+    get_history()
+        Get the historical values of the cell.
+    get_input_data()
+        Get the input data for the cell.
     metabolize(factor)
         Metabolize energy based on a specified factor.
+    get_energy()
+        Get the energy level of the cell.
     """
-    def __init__(self, position, metabolism_rate=1.0):
-        super().__init__(position)
+    def __init__(self, position, metabolism_rate=1.0, input_data_func=None):
+        super().__init__(position, input_data_func=input_data_func or self.get_energy)
         self.metabolism_rate = metabolism_rate
         self.energy = 100.0
 
-    def update(self, historical_value=None):
+    def update(self):
         """
         Update the cell's state based on its energy level.
         """
@@ -484,6 +526,17 @@ class MetabolicCell(Cell):
         Metabolize energy based on a specified factor.
         """
         self.energy *= factor
+
+    def get_energy(self, _=None):
+        """
+        Get the energy level of the cell.
+
+        Returns
+        -------
+        float
+            The energy level of the cell.
+        """
+        return self.energy
 
 
 class GeneRegulationCell(Cell):
@@ -497,6 +550,10 @@ class GeneRegulationCell(Cell):
         The position of the cell.
     gene_expression_level : float, optional
         The initial gene expression level. Default is 1.0.
+    regulation_variance : float, optional
+        The maximum variance in the regulation of gene expression level. Default is 0.05.
+    input_data_func : function, optional
+        A function to generate input data for the cell. Default is None.
 
     Attributes
     ----------
@@ -506,28 +563,34 @@ class GeneRegulationCell(Cell):
         List of modules that define the behavior of the cell.
     history : list
         List of historical values for the cell.
+    input_data_func : function, optional
+        A function to generate input data for the cell.
     gene_expression_level : float
         The gene expression level of the cell.
+    regulation_variance : float
+        The maximum variance in the regulation of gene expression level.
 
     Methods
     -------
     update()
         Update the cell's state.
+    get_history()
+        Get the historical values of the cell.
+    get_input_data()
+        Get the input data for the cell.
     regulate_genes(regulation_factor)
         Regulate the cell's gene expression level by a specified factor.
+    get_gene_expression_level()
+        Get the gene expression level of the cell.
     """
-    def __init__(self, position, gene_expression_level=1.0):
-        super().__init__(position)
+    def __init__(self, position, gene_expression_level=1.0, regulation_variance=0.05, input_data_func=None):
+        super().__init__(position, input_data_func=input_data_func or self.get_gene_expression_level)
         self.gene_expression_level = gene_expression_level
+        self.regulation_variance = regulation_variance
 
-    def update(self, historical_value=None):
+    def update(self):
         """
         Update the cell's state based on its gene expression level.
-
-        Parameters
-        ----------
-        historical_value : any, optional
-            The historical value to append to the cell's history. Default is None.
         """
         super().update(self.gene_expression_level)
 
@@ -541,3 +604,15 @@ class GeneRegulationCell(Cell):
             The factor by which to regulate the gene expression level.
         """
         self.gene_expression_level *= regulation_factor
+        self.gene_expression_level += np.random.uniform(-self.regulation_variance, self.regulation_variance)
+
+    def get_gene_expression_level(self, _=None):
+        """
+        Get the gene expression level of the cell.
+
+        Returns
+        -------
+        float
+            The gene expression level of the cell.
+        """
+        return self.gene_expression_level

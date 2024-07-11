@@ -157,7 +157,8 @@
 
 <div class="viewcode-block" id="BaseMLModule.collect_input_data">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.BaseMLModule.collect_input_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="n">agent</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Collect the input data for the machine learning model.</span>
 
@@ -171,7 +172,7 @@
 <span class="sd">        array-like</span>
 <span class="sd">            The input data for the machine learning model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">position</span><span class="p">]</span>  <span class="c1"># Default implementation, can be overridden</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">get_input_data</span><span class="p">(</span><span class="n">agent</span><span class="p">)]</span>  <span class="c1"># Default implementation, can be overridden</span></div>
 
 
 <div class="viewcode-block" id="BaseMLModule.apply_prediction">
@@ -199,7 +200,7 @@
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.BaseMLModule.drop_prediction_dimensionality">[docs]</a>
     <span class="k">def</span> <span class="nf">drop_prediction_dimensionality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Drop the dimensionality of the prediction if necessary (i.e., from Tensorflow models).</span>
+<span class="sd">        Drop the dimensionality of the prediction if necessary (e.g., from Tensorflow models).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -213,7 +214,23 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">.tf_module</span> <span class="kn">import</span> <span class="n">TFModel</span>
-            <span class="k">return</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ml_model</span><span class="p">,</span> <span class="n">TFModel</span><span class="p">)</span> <span class="k">else</span> <span class="n">prediction</span>
+            <span class="kn">from</span> <span class="nn">.onnx_module</span> <span class="kn">import</span> <span class="n">ONNXModel</span>
+            <span class="kn">from</span> <span class="nn">.torch_module</span> <span class="kn">import</span> <span class="n">TorchModel</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ml_model</span><span class="p">,</span> <span class="n">TFModel</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">prediction</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ml_model</span><span class="p">,</span> <span class="n">TorchModel</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="p">((</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">))</span>
+                                         <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="n">prediction</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ml_model</span><span class="p">,</span> <span class="n">ONNXModel</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">prediction</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                    <span class="n">prediction</span> <span class="o">=</span> <span class="n">prediction</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="p">[</span><span class="n">prediction</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">prediction</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">prediction</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">prediction</span></div>
 </div>
@@ -248,25 +265,6 @@
 <span class="sd">    apply_prediction(agent, prediction)</span>
 <span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="SpikingNeuronModule.collect_input_data">
-<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.SpikingNeuronModule.collect_input_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Collect the input data for the machine learning model. In this case, the membrane potential of the agent.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        agent : Agent</span>
-<span class="sd">            The agent to collect input data from.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        array-like</span>
-<span class="sd">            The input data for the machine learning model.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">get_input_data</span><span class="p">()]</span></div>
-
 
 <div class="viewcode-block" id="SpikingNeuronModule.apply_prediction">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.SpikingNeuronModule.apply_prediction">[docs]</a>
@@ -333,25 +331,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">growth_variance</span> <span class="o">=</span> <span class="n">growth_variance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prediction_threshold</span> <span class="o">=</span> <span class="n">prediction_threshold</span>
 
-<div class="viewcode-block" id="GrowthShrinkageModule.collect_input_data">
-<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule.collect_input_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Collect the input data for the machine learning model. In this case, the volume of the agent.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        agent : Agent</span>
-<span class="sd">            The agent to collect input data from.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        array-like</span>
-<span class="sd">            The input data for the machine learning model.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">get_volume</span><span class="p">()]</span></div>
-
-
 <div class="viewcode-block" id="GrowthShrinkageModule.apply_prediction">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.GrowthShrinkageModule.apply_prediction">[docs]</a>
     <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
@@ -404,25 +383,6 @@
 <span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="DifferentiationModule.collect_input_data">
-<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.DifferentiationModule.collect_input_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Collect the input data for the machine learning model. In this case, the state of the agent.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        agent : Agent</span>
-<span class="sd">            The agent to collect input data from.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        array-like</span>
-<span class="sd">            The input data for the machine learning model.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">get_state</span><span class="p">()]</span></div>
-
-
 <div class="viewcode-block" id="DifferentiationModule.apply_prediction">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.DifferentiationModule.apply_prediction">[docs]</a>
     <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
@@ -470,25 +430,6 @@
 <span class="sd">    apply_prediction(agent, prediction)</span>
 <span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="ChemotaxisModule.collect_input_data">
-<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.ChemotaxisModule.collect_input_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Collect the input data for the machine learning model. In this case, the chemotactic gradient of the agent.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        agent : Agent</span>
-<span class="sd">            The agent to collect input data from.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        array-like</span>
-<span class="sd">            The input data for the machine learning model.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">get_chemotactic_gradient</span><span class="p">()]</span></div>
-
 
 <div class="viewcode-block" id="ChemotaxisModule.apply_prediction">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.ChemotaxisModule.apply_prediction">[docs]</a>
@@ -538,25 +479,6 @@
 <span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ImmuneResponseModule.collect_input_data">
-<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.ImmuneResponseModule.collect_input_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Collect the input data for the machine learning model. In this case, whether the agent is active or not.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        agent : Agent</span>
-<span class="sd">            The agent to collect input data from.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        array-like</span>
-<span class="sd">            The input data for the machine learning model.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">is_active</span><span class="p">()]</span></div>
-
-
 <div class="viewcode-block" id="ImmuneResponseModule.apply_prediction">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.ImmuneResponseModule.apply_prediction">[docs]</a>
     <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
@@ -590,6 +512,8 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
+<span class="sd">    ml_model : BaseMLModel</span>
+<span class="sd">        The machine learning model to use for prediction.</span>
 <span class="sd">    synapse : Synapse</span>
 <span class="sd">        The synapse to update.</span>
 <span class="sd">    learning_rate : float, optional</span>
@@ -608,8 +532,8 @@
 <span class="sd">        Run the module on the given agent.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">synapse</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ml_model</span><span class="p">,</span> <span class="n">synapse</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ml_model</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span> <span class="o">=</span> <span class="n">synapse</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
 
@@ -623,26 +547,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">weight</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">pre_spike</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">post_spike</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">weight</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">synapse</span><span class="o">.</span><span class="n">weight</span></div>
-
-
-<div class="viewcode-block" id="SynapticPlasticityModule.collect_input_data">
-<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.SynapticPlasticityModule.collect_input_data">[docs]</a>
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="n">agent</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Collect the input data for the machine learning model. In this case, the membrane potential of the agent.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        agent : Agent</span>
-<span class="sd">            The agent to collect input data from.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        array-like</span>
-<span class="sd">            The input data for the machine learning model.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">get_input_data</span><span class="p">()]</span></div>
 
 
 <div class="viewcode-block" id="SynapticPlasticityModule.apply_prediction">
@@ -693,25 +597,6 @@
 <span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="MetabolicModule.collect_input_data">
-<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.MetabolicModule.collect_input_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Collect the input data for the machine learning model. In this case, the energy level of the agent.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        agent : Agent</span>
-<span class="sd">            The agent to collect input data from.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        array-like</span>
-<span class="sd">            The input data for the machine learning model.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">energy</span><span class="p">]</span></div>
-
-
 <div class="viewcode-block" id="MetabolicModule.apply_prediction">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.MetabolicModule.apply_prediction">[docs]</a>
     <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
@@ -760,25 +645,6 @@
 <span class="sd">        Apply the prediction of the machine learning model to the agent.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="GeneRegulationModule.collect_input_data">
-<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.GeneRegulationModule.collect_input_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">collect_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Collect the input data for the machine learning model. In this case, the gene expression level of the agent.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        agent : Agent</span>
-<span class="sd">            The agent to collect input data from.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        array-like</span>
-<span class="sd">            The input data for the machine learning model.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">gene_expression_level</span><span class="p">]</span></div>
-
-
 <div class="viewcode-block" id="GeneRegulationModule.apply_prediction">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.modules.GeneRegulationModule.apply_prediction">[docs]</a>
     <span class="k">def</span> <span class="nf">apply_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
@@ -795,7 +661,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_prediction_dimensionality</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
         <span class="n">regulation_factor</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">agent</span><span class="o">.</span><span class="n">regulate_genes</span><span class="p">(</span><span class="n">regulation_factor</span><span class="p">)</span></div>
+        <span class="n">scaled_factor</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">regulation_factor</span>  <span class="c1"># Scale regulation_factor from [0, 1] to [0.5, 1.5]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Regulation factor: </span><span class="si">{</span><span class="n">scaled_factor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">regulate_genes</span><span class="p">(</span><span class="n">scaled_factor</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

@@ -58,6 +58,8 @@ class Cell(Agent):
     ----------
     position : tuple
         The position of the cell in the environment.
+    input_data_func : function, optional
+        The input data function for the cell. Default is None.
 
     Attributes
     ----------
@@ -67,6 +69,8 @@ class Cell(Agent):
         List of modules that define the behavior of the cell.
     history : list
         List of historical values for the cell.
+    input_data_func : function
+        The input data function for the cell.
 
     Methods
     -------
@@ -76,11 +80,17 @@ class Cell(Agent):
         Update the cell's state based on its modules and historical value.
     get_history()
         Get the historical values of the cell.
+    default_input_data_func()
+        Default input data function for the cell.
+    get_input_data()
+        Get the input data for the cell.
     """
 
-    def __init__(self, position):
+    def __init__(self, position, input_data_func=None):
         super().__init__(position)
         self.history = []
+        self.input_data_func = input_data_func if input_data_func is not None \
+            else lambda _: (_ for _ in ()).throw(NotImplementedError("Subclasses should implement this method!"))
 
     def update(self, historical_value=None):
         """
@@ -105,6 +115,17 @@ class Cell(Agent):
             List of historical values for the cell.
         """
         return self.history
+
+    def get_input_data(self, _=None):
+        """
+        Get the input data for the neuron.
+
+        Returns
+        -------
+        list
+            List of input data values.
+        """
+        return self.input_data_func(_)
 
 
 class Synapse:
@@ -301,4 +322,60 @@ class Organoid:
                 dot.view()
         except ImportError as e:
             print("Error: Graphviz is required to plot the organoid structure.")
+            raise e
+
+    def plot_simulation_history(self, title, y_label, x_label="Time Steps", filename=None, dpi=300, figsize=(10, 6)):
+        """
+        Plot the simulation history of the organoid using Matplotlib.
+
+        Parameters
+        ----------
+        title : str
+            The title of the plot.
+        y_label : str
+            The label for the y-axis.
+        x_label : str, optional
+            The label for the x-axis. Default is "Time Steps".
+        filename : str, optional
+            The filename to save the plot as (in PNG format). Default is None (view the image with plt.show()).
+        dpi : int, optional
+            The DPI (dots per inch) of the plot. Default is 300.
+        figsize : tuple, optional
+            The size of the figure (width, height) in inches. Default is (10, 6).
+
+        Raises
+        ------
+        ImportError
+            If Matplotlib is not installed.
+        """
+        try:
+            import numpy as np
+            import matplotlib.pyplot as plt
+
+            def contains_arrays(lst):
+                """Check if the list contains any numpy arrays."""
+                return any(isinstance(item, np.ndarray) for item in lst)
+
+            def flatten_list(lst):
+                """Flatten a list containing numpy arrays."""
+                return [item if not isinstance(item, np.ndarray) else item.item() for item in lst]
+
+            plt.figure(figsize=figsize)
+            for i, cell in enumerate(self.get_cells()):
+                history = cell.get_history()
+                if contains_arrays(history):
+                    history = flatten_list(history)
+                plt.plot(history, label=f'Cell {i + 1}')
+
+            plt.xlabel(x_label)
+            plt.ylabel(y_label)
+            plt.title(title)
+            plt.legend()
+            if filename is not None:
+                plt.savefig(filename, dpi=dpi)
+                print(f'Simulation history plot saved as "{filename}"')
+            else:
+                plt.show()
+        except ImportError as e:
+            print("Error: Matplotlib and NumPy are required to plot the simulation history.")
             raise e

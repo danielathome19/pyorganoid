@@ -37,6 +37,7 @@ __all__ = [
     'TFModel', 'TFModule',
     'TorchModel', 'TorchModule',
     'SklearnModel', 'SklearnModule',
+    'ONNXModel', 'ONNXModule',
 ]
 
 
@@ -61,11 +62,20 @@ except ImportError:
     SklearnModule = None
 
 
+try:
+    from .onnx_module import ONNXModel, ONNXModule
+except ImportError:
+    ONNXModel = None
+    ONNXModule = None
+
+
 globals().update({
     "TFModel": TFModel,
     "TFModule": TFModule,
+    "ONNXModel": ONNXModel,
+    "ONNXModule": ONNXModule,
     "TorchModel": TorchModel,
     "TorchModule": TorchModule,
     "SklearnModel": SklearnModel,
-    "SklearnModule": SklearnModule
+    "SklearnModule": SklearnModule,
 })

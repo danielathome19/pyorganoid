@@ -15,7 +15,7 @@ https://DOI_LINK_HERE)-->
 Pyorganoid is the world's first<sup>*</sup> Python package for the simulation of organoids for the purpose of studying 
 Organoid Intelligence (OI) and Organoid Learning (OL).
 It is designed to be simple to use and easy to extend with support for standard machine
-learning libraries such as TensorFlow, PyTorch, and Scikit-Learn.
+learning libraries such as TensorFlow, PyTorch, and Scikit-Learn (as well as ONNX-format models).
 
 <!-- - **Website:** https://danielathome19.github.io/pyorganoid/ -->
 - **Documentation:** https://danielathome19.github.io/pyorganoid/docs/
@@ -59,12 +59,13 @@ To include support for all machine learning libraries, use:
 pip install pyorganoid[all]
 ```
 
-Or, to include support for a specific library (TensorFlow, PyTorch, or Scikit-Learn), use:
+Or, to include support for a specific library (TensorFlow, PyTorch, Scikit-Learn, or ONNX), use:
 
 ```bash
 pip install pyorganoid[tensorflow]
 pip install pyorganoid[torch]
 pip install pyorganoid[sklearn]
+pip install pyorganoid[onnx]
 ```
 
 
@@ -82,12 +83,13 @@ To include support for all machine learning libraries, use:
 conda install -c conda-forge pyorganoid-all
 ```
 
-Or, to include support for a specific library (TensorFlow, PyTorch, or Scikit-Learn), use:
+Or, to include support for a specific library (TensorFlow, PyTorch, Scikit-Learn, or ONNX), use:
 
 ```bash
 conda install -c conda-forge pyorganoid-tensorflow
 conda install -c conda-forge pyorganoid-torch
 conda install -c conda-forge pyorganoid-sklearn
+conda install -c conda-forge pyorganoid-onnx
 ```
 
 
@@ -97,18 +99,27 @@ For a quick introduction to Pyorganoid, see the [Spiking Neuron Test](tests/spik
 This test demonstrates the creation of a simple spiking neuron organoid running a binary classification Multi-Layer
 Perceptron (MLP) model using TensorFlow.
 
-If you prefer Scikit-Learn or PyTorch, see the [Volumetric Organoid Test (Scikit-Learn)](tests/growshrink_test.py) or
-the [Gene Regulation Organoid Test (PyTorch)](tests/generegulation_test.py), respectively.
+If you prefer Scikit-Learn, PyTorch, or ONNX models, see the [Volumetric Organoid Test (Scikit-Learn)](tests/growshrink_test.py),
+the [Gene Regulation Organoid Test (PyTorch)](tests/generegulation_test.py), or
+the [Immune Response Organoid Test (ONNX)](tests/immune_test.py), respectively.
 
 
 <table style="width:100%;">
 <tr>
-<td>
-    <img src=".github/images/membranepotential.png" style="width:100%;" align="center" alt="Spiking Organoid Example">
-</td>
-<td>
-    <img src=".github/images/growshrink.png" style="width:100%;" align="center" alt="Volumetric Organoid Example">    
-</td>
+    <td>
+        <img src=".github/images/membrane_potential_simulation.png" style="width:100%;" align="center" alt="Spiking Organoid Example">
+    </td>
+    <td>
+        <img src=".github/images/volume_simulation.png" style="width:100%;" align="center" alt="Volumetric Organoid Example">    
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src=".github/images/generegulation_simulation.png" style="width:100%;" align="center" alt="Gene Regulation Organoid Example">
+    </td>
+    <td>
+        <img src=".github/images/immune_response_simulation.png" style="width:100%;" align="center" alt="Immune Response Organoid Example">    
+    </td>
 </tr>
 </table>
 

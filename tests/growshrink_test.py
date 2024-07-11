@@ -44,16 +44,8 @@ def main():
         # scheduler = Scheduler(organoid)
         # scheduler.simulate(steps=25)
 
-        plt.figure(figsize=(10, 6))
-        for i, cell in enumerate(organoid.get_cells()):
-            plt.plot(cell.get_history(), label=f'Cell {i+1}')
-            # print(f'Cell {i+1}', cell.get_history())
-
-        plt.xlabel('Time Steps')
-        plt.ylabel('Volume')
-        plt.title('Volume of Cells Over Time')
-        plt.legend()
-        plt.show()
+        organoid.plot_simulation_history('Volume of Cells Over Time', 'Volume',
+                                         filename='volume_simulation.png', dpi=300)
     except ImportError as e:
         print(e)
 

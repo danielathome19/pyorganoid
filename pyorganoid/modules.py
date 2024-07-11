@@ -71,7 +71,8 @@ class BaseMLModule(BaseModule):
         prediction = self.ml_model.predict(input_data, verbose=verbose)
         self.apply_prediction(agent, prediction)
 
-    def collect_input_data(self, agent):
+    @staticmethod
+    def collect_input_data(agent):
         """
         Collect the input data for the machine learning model.
 
@@ -85,7 +86,7 @@ class BaseMLModule(BaseModule):
         array-like
             The input data for the machine learning model.
         """
-        return [agent.position]  # Default implementation, can be overridden
+        return [agent.get_input_data(agent)]  # Default implementation, can be overridden
 
     def apply_prediction(self, agent, prediction):
         """
@@ -107,7 +108,7 @@ class BaseMLModule(BaseModule):
 
     def drop_prediction_dimensionality(self, prediction):
         """
-        Drop the dimensionality of the prediction if necessary (i.e., from Tensorflow models).
+        Drop the dimensionality of the prediction if necessary (e.g., from Tensorflow models).
 
         Parameters
         ----------
@@ -121,7 +122,23 @@ class BaseMLModule(BaseModule):
         """
         try:
             from .tf_module import TFModel
-            return prediction[0] if isinstance(self.ml_model, TFModel) else prediction
+            from .onnx_module import ONNXModel
+            from .torch_module import TorchModel
+            if isinstance(self.ml_model, TFModel):
+                return prediction[0] if isinstance(prediction, list) and len(prediction) > 0 else prediction
+            elif isinstance(self.ml_model, TorchModel):
+                return prediction[0] if ((isinstance(prediction, list) or isinstance(prediction, np.ndarray))
+                                         and len(prediction) > 0) else prediction
+            elif isinstance(self.ml_model, ONNXModel):
+                if isinstance(prediction, list) and len(prediction) > 0:
+                    prediction = prediction[0]
+                if isinstance(prediction, np.ndarray):
+                    prediction = prediction.flatten().tolist()
+                if isinstance(prediction, float) or isinstance(prediction, int):
+                    return [prediction]
+                return prediction
+            else:
+                return prediction
         except ImportError:
             return prediction
 
@@ -152,22 +169,6 @@ class SpikingNeuronModule(BaseMLModule):
     apply_prediction(agent, prediction)
         Apply the prediction of the machine learning model to the agent.
     """
-
-    def collect_input_data(self, agent):
-        """
-        Collect the input data for the machine learning model. In this case, the membrane potential of the agent.
-
-        Parameters
-        ----------
-        agent : Agent
-            The agent to collect input data from.
-
-        Returns
-        -------
-        array-like
-            The input data for the machine learning model.
-        """
-        return [agent.get_input_data()]
 
     def apply_prediction(self, agent, prediction):
         """
@@ -228,22 +229,6 @@ class GrowthShrinkageModule(BaseMLModule):
         self.growth_variance = growth_variance
         self.prediction_threshold = prediction_threshold
 
-    def collect_input_data(self, agent):
-        """
-        Collect the input data for the machine learning model. In this case, the volume of the agent.
-
-        Parameters
-        ----------
-        agent : Agent
-            The agent to collect input data from.
-
-        Returns
-        -------
-        array-like
-            The input data for the machine learning model.
-        """
-        return [agent.get_volume()]
-
     def apply_prediction(self, agent, prediction):
         """
         Apply the prediction of the machine learning model to the agent.
@@ -290,22 +275,6 @@ class DifferentiationModule(BaseMLModule):
         Apply the prediction of the machine learning model to the agent.
     """
 
-    def collect_input_data(self, agent):
-        """
-        Collect the input data for the machine learning model. In this case, the state of the agent.
-
-        Parameters
-        ----------
-        agent : Agent
-            The agent to collect input data from.
-
-        Returns
-        -------
-        array-like
-            The input data for the machine learning model.
-        """
-        return [agent.get_state()]
-
     def apply_prediction(self, agent, prediction):
         """
         Apply the prediction of the machine learning model to the agent.
@@ -347,22 +316,6 @@ class ChemotaxisModule(BaseMLModule):
     apply_prediction(agent, prediction)
         Apply the prediction of the machine learning model to the agent.
     """
-
-    def collect_input_data(self, agent):
-        """
-        Collect the input data for the machine learning model. In this case, the chemotactic gradient of the agent.
-
-        Parameters
-        ----------
-        agent : Agent
-            The agent to collect input data from.
-
-        Returns
-        -------
-        array-like
-            The input data for the machine learning model.
-        """
-        return [agent.get_chemotactic_gradient()]
 
     def apply_prediction(self, agent, prediction):
         """
@@ -406,22 +359,6 @@ class ImmuneResponseModule(BaseMLModule):
         Apply the prediction of the machine learning model to the agent.
     """
 
-    def collect_input_data(self, agent):
-        """
-        Collect the input data for the machine learning model. In this case, whether the agent is active or not.
-
-        Parameters
-        ----------
-        agent : Agent
-            The agent to collect input data from.
-
-        Returns
-        -------
-        array-like
-            The input data for the machine learning model.
-        """
-        return [agent.is_active()]
-
     def apply_prediction(self, agent, prediction):
         """
         Apply the prediction of the machine learning model to the agent.
@@ -449,6 +386,8 @@ class SynapticPlasticityModule(BaseMLModule):
 
     Parameters
     ----------
+    ml_model : BaseMLModel
+        The machine learning model to use for prediction.
     synapse : Synapse
         The synapse to update.
     learning_rate : float, optional
@@ -467,8 +406,8 @@ class SynapticPlasticityModule(BaseMLModule):
         Run the module on the given agent.
 
     """
-    def __init__(self, synapse, learning_rate=0.01):
-        super().__init__()
+    def __init__(self, ml_model, synapse, learning_rate=0.01):
+        super().__init__(ml_model)
         self.synapse = synapse
         self.learning_rate = learning_rate
 
@@ -480,23 +419,6 @@ class SynapticPlasticityModule(BaseMLModule):
             self.synapse.weight += self.learning_rate * (1 - self.synapse.weight)
         elif pre_spike and not post_spike:
             self.synapse.weight -= self.learning_rate * self.synapse.weight
-
-    @staticmethod
-    def collect_input_data(agent):
-        """
-        Collect the input data for the machine learning model. In this case, the membrane potential of the agent.
-
-        Parameters
-        ----------
-        agent : Agent
-            The agent to collect input data from.
-
-        Returns
-        -------
-        array-like
-            The input data for the machine learning model.
-        """
-        return [agent.get_input_data()]
 
     def apply_prediction(self, agent, prediction):
         """
@@ -540,22 +462,6 @@ class MetabolicModule(BaseMLModule):
         Apply the prediction of the machine learning model to the agent.
     """
 
-    def collect_input_data(self, agent):
-        """
-        Collect the input data for the machine learning model. In this case, the energy level of the agent.
-
-        Parameters
-        ----------
-        agent : Agent
-            The agent to collect input data from.
-
-        Returns
-        -------
-        array-like
-            The input data for the machine learning model.
-        """
-        return [agent.energy]
-
     def apply_prediction(self, agent, prediction):
         """
         Apply the prediction of the machine learning model to the agent.
@@ -598,22 +504,6 @@ class GeneRegulationModule(BaseMLModule):
         Apply the prediction of the machine learning model to the agent.
     """
 
-    def collect_input_data(self, agent):
-        """
-        Collect the input data for the machine learning model. In this case, the gene expression level of the agent.
-
-        Parameters
-        ----------
-        agent : Agent
-            The agent to collect input data from.
-
-        Returns
-        -------
-        array-like
-            The input data for the machine learning model.
-        """
-        return [agent.gene_expression_level]
-
     def apply_prediction(self, agent, prediction):
         """
         Apply the prediction of the machine learning model to the agent.
@@ -628,4 +518,6 @@ class GeneRegulationModule(BaseMLModule):
         """
         prediction = self.drop_prediction_dimensionality(prediction)
         regulation_factor = prediction[0]
-        agent.regulate_genes(regulation_factor)
+        scaled_factor = 0.5 + regulation_factor  # Scale regulation_factor from [0, 1] to [0.5, 1.5]
+        print(f"Regulation factor: {scaled_factor}")
+        agent.regulate_genes(scaled_factor)

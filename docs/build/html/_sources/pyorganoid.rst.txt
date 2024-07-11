@@ -52,6 +52,14 @@ pyorganoid.modules module
    :undoc-members:
    :show-inheritance:
 
+pyorganoid.onnx\_module module
+------------------------------
+
+.. automodule:: pyorganoid.onnx_module
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pyorganoid.organoids module
 ---------------------------
 

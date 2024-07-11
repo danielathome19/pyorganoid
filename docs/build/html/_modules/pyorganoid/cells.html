@@ -71,7 +71,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for pyorganoid.cells</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Cell</span>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Cell</span>
 
 
 <div class="viewcode-block" id="SpikingNeuronCell">
@@ -99,12 +100,12 @@
 <span class="sd">        List of modules that define the behavior of the cell.</span>
 <span class="sd">    history : list</span>
 <span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function</span>
+<span class="sd">        The function to generate input data for the neuron.</span>
 <span class="sd">    membrane_potential : float</span>
 <span class="sd">        The membrane potential of the neuron.</span>
 <span class="sd">    threshold : float</span>
 <span class="sd">        The threshold for spiking.</span>
-<span class="sd">    input_data_func : function</span>
-<span class="sd">        The function to generate input data for the neuron.</span>
 
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
@@ -112,18 +113,15 @@
 <span class="sd">        Update the cell&#39;s state.</span>
 <span class="sd">    get_history()</span>
 <span class="sd">        Get the historical values of the cell.</span>
-<span class="sd">    spike(verbose=False)</span>
-<span class="sd">        Spike the neuron.</span>
-<span class="sd">    default_input_data_func()</span>
-<span class="sd">        Default input data function based on position.</span>
 <span class="sd">    get_input_data()</span>
 <span class="sd">        Get the input data for the neuron.</span>
+<span class="sd">    spike(verbose=False)</span>
+<span class="sd">        Spike the neuron.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_input_data_func</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">input_data_func</span> <span class="o">=</span> <span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_input_data_func</span>
 
 <div class="viewcode-block" id="SpikingNeuronCell.spike">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.spike">[docs]</a>
@@ -141,6 +139,17 @@
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Neuron at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="si">}</span><span class="s2"> spiked!&quot;</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="SpikingNeuronCell.update">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the cell&#39;s state. Record the membrane potential and spike if it exceeds the threshold.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">membrane_potential</span><span class="p">)</span>  <span class="c1"># Record the membrane potential</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spike</span><span class="p">()</span></div>
+
+
 <div class="viewcode-block" id="SpikingNeuronCell.default_input_data_func">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.default_input_data_func">[docs]</a>
     <span class="nd">@staticmethod</span>
@@ -155,31 +164,6 @@
 <span class="sd">            List of input data values.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>  <span class="c1"># 10 input values</span></div>
-
-
-<div class="viewcode-block" id="SpikingNeuronCell.get_input_data">
-<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.get_input_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the input data for the neuron.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        list</span>
-<span class="sd">            List of input data values.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_data_func</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="SpikingNeuronCell.update">
-<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SpikingNeuronCell.update">[docs]</a>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Update the cell&#39;s state. Record the membrane potential and spike if it exceeds the threshold.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">membrane_potential</span><span class="p">)</span>  <span class="c1"># Record the membrane potential</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">membrane_potential</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">spike</span><span class="p">()</span></div>
 </div>
 
 
@@ -197,6 +181,8 @@
 <span class="sd">        The position of the cell.</span>
 <span class="sd">    initial_volume : float, optional</span>
 <span class="sd">        The initial volume of the cell. Default is 1.0.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -206,6 +192,8 @@
 <span class="sd">        List of modules that define the behavior of the cell.</span>
 <span class="sd">    history : list</span>
 <span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Defaults to the get_volume method.</span>
 <span class="sd">    volume : float</span>
 <span class="sd">        The volume of the cell.</span>
 
@@ -215,6 +203,8 @@
 <span class="sd">        Update the cell&#39;s state.</span>
 <span class="sd">    get_history()</span>
 <span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
 <span class="sd">    grow(amount)</span>
 <span class="sd">        Grow the cell by a specified amount.</span>
 <span class="sd">    shrink(amount)</span>
@@ -222,8 +212,8 @@
 <span class="sd">    get_volume()</span>
 <span class="sd">        Get the volume of the cell.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">initial_volume</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">initial_volume</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_volume</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">initial_volume</span>
 
 <div class="viewcode-block" id="GrowthShrinkageCell.update">
@@ -265,7 +255,7 @@
 
 <div class="viewcode-block" id="GrowthShrinkageCell.get_volume">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GrowthShrinkageCell.get_volume">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the current volume of the cell.</span>
 
@@ -292,6 +282,8 @@
 <span class="sd">        The position of the cell.</span>
 <span class="sd">    state : str, optional</span>
 <span class="sd">        The initial state of the cell. Default is &#39;undifferentiated&#39;.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -301,6 +293,8 @@
 <span class="sd">        List of modules that define the behavior of the cell.</span>
 <span class="sd">    history : list</span>
 <span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
 <span class="sd">    state : str</span>
 <span class="sd">        The state of the cell.</span>
 
@@ -310,13 +304,15 @@
 <span class="sd">        Update the cell&#39;s state.</span>
 <span class="sd">    get_history()</span>
 <span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
 <span class="sd">    differentiate(new_state)</span>
 <span class="sd">        Differentiate the cell into a new state.</span>
 <span class="sd">    get_state()</span>
 <span class="sd">        Get the state of the cell.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s1">&#39;undifferentiated&#39;</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s1">&#39;undifferentiated&#39;</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
 
 <div class="viewcode-block" id="DifferentiatingCell.update">
@@ -344,7 +340,7 @@
 
 <div class="viewcode-block" id="DifferentiatingCell.get_state">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.DifferentiatingCell.get_state">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the current state of the cell.</span>
 
@@ -369,6 +365,8 @@
 <span class="sd">    ----------</span>
 <span class="sd">    position : {tuple, int}</span>
 <span class="sd">        The position of the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -378,6 +376,8 @@
 <span class="sd">        List of modules that define the behavior of the cell.</span>
 <span class="sd">    history : list</span>
 <span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
 <span class="sd">    chemotactic_gradient : float</span>
 <span class="sd">        The chemotactic gradient for the cell.</span>
 <span class="sd">        Positive values indicate movement towards the gradient.</span>
@@ -389,13 +389,15 @@
 <span class="sd">        Update the cell&#39;s state.</span>
 <span class="sd">    get_history()</span>
 <span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
 <span class="sd">    move_towards_gradient(gradient)</span>
 <span class="sd">        Move the cell towards the specified gradient.</span>
 <span class="sd">    get_chemotactic_gradient()</span>
 <span class="sd">        Get the chemotactic gradient of the cell.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_chemotactic_gradient</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chemotactic_gradient</span> <span class="o">=</span> <span class="mf">0.0</span>
 
 <div class="viewcode-block" id="ChemotacticCell.update">
@@ -423,7 +425,7 @@
 
 <div class="viewcode-block" id="ChemotacticCell.get_chemotactic_gradient">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.ChemotacticCell.get_chemotactic_gradient">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_chemotactic_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_chemotactic_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the chemotactic gradient of the cell.</span>
 
@@ -450,6 +452,8 @@
 <span class="sd">        The position of the cell.</span>
 <span class="sd">    active : bool, optional</span>
 <span class="sd">        Whether the cell is initially active. Default is False.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -459,6 +463,8 @@
 <span class="sd">        List of modules that define the behavior of the cell.</span>
 <span class="sd">    history : list</span>
 <span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
 <span class="sd">    active : bool</span>
 <span class="sd">        Whether the cell is currently active.</span>
 
@@ -468,6 +474,8 @@
 <span class="sd">        Update the cell&#39;s state.</span>
 <span class="sd">    get_history()</span>
 <span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
 <span class="sd">    activate()</span>
 <span class="sd">        Activate the cell.</span>
 <span class="sd">    deactivate()</span>
@@ -475,8 +483,8 @@
 <span class="sd">    is_active()</span>
 <span class="sd">        Check if the cell is currently active or not.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="n">active</span>
 
 <div class="viewcode-block" id="ImmuneCell.update">
@@ -508,7 +516,7 @@
 
 <div class="viewcode-block" id="ImmuneCell.is_active">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.ImmuneCell.is_active">[docs]</a>
-    <span class="k">def</span> <span class="nf">is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check if the cell is currently active or not.</span>
 
@@ -536,6 +544,8 @@
 <span class="sd">        The position of the cell.</span>
 <span class="sd">    initial_synapses : list, optional</span>
 <span class="sd">        List of initial synapses for the cell. Default is None.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -545,6 +555,8 @@
 <span class="sd">        List of modules that define the behavior of the cell.</span>
 <span class="sd">    history : list</span>
 <span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
 <span class="sd">    synapses : list</span>
 <span class="sd">        List of synapses connected to the cell.</span>
 
@@ -552,11 +564,17 @@
 <span class="sd">    -------</span>
 <span class="sd">    update()</span>
 <span class="sd">        Update the cell&#39;s state.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
 <span class="sd">    add_synapse(synapse)</span>
 <span class="sd">        Add a synapse to the cell.</span>
+<span class="sd">    get_synapses()</span>
+<span class="sd">        Get the synapses connected to the cell.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">initial_synapses</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">initial_synapses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_synapses</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">synapses</span> <span class="o">=</span> <span class="n">initial_synapses</span> <span class="k">if</span> <span class="n">initial_synapses</span> <span class="k">else</span> <span class="p">[]</span>
 
 <div class="viewcode-block" id="SynapticPlasticityCell.update">
@@ -583,6 +601,20 @@
 <span class="sd">        Add a synapse to the cell.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">synapses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">synapse</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SynapticPlasticityCell.get_synapses">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.SynapticPlasticityCell.get_synapses">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_synapses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the synapses connected to the cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            List of synapses connected to the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">synapses</span></div>
 </div>
 
 
@@ -600,6 +632,8 @@
 <span class="sd">        The position of the cell.</span>
 <span class="sd">    metabolism_rate : float, optional</span>
 <span class="sd">        The rate at which the cell metabolizes energy. Default is 1.0.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -609,6 +643,8 @@
 <span class="sd">        List of modules that define the behavior of the cell.</span>
 <span class="sd">    history : list</span>
 <span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
 <span class="sd">    metabolism_rate : float</span>
 <span class="sd">        The rate at which the cell metabolizes energy.</span>
 <span class="sd">    energy : float</span>
@@ -618,17 +654,23 @@
 <span class="sd">    -------</span>
 <span class="sd">    update()</span>
 <span class="sd">        Update the cell&#39;s state.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
 <span class="sd">    metabolize(factor)</span>
 <span class="sd">        Metabolize energy based on a specified factor.</span>
+<span class="sd">    get_energy()</span>
+<span class="sd">        Get the energy level of the cell.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">metabolism_rate</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">metabolism_rate</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_energy</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metabolism_rate</span> <span class="o">=</span> <span class="n">metabolism_rate</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="mf">100.0</span>
 
 <div class="viewcode-block" id="MetabolicCell.update">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.MetabolicCell.update">[docs]</a>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">historical_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update the cell&#39;s state based on its energy level.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -642,6 +684,20 @@
 <span class="sd">        Metabolize energy based on a specified factor.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">*=</span> <span class="n">factor</span></div>
+
+
+<div class="viewcode-block" id="MetabolicCell.get_energy">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.MetabolicCell.get_energy">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the energy level of the cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The energy level of the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy</span></div>
 </div>
 
 
@@ -659,6 +715,10 @@
 <span class="sd">        The position of the cell.</span>
 <span class="sd">    gene_expression_level : float, optional</span>
 <span class="sd">        The initial gene expression level. Default is 1.0.</span>
+<span class="sd">    regulation_variance : float, optional</span>
+<span class="sd">        The maximum variance in the regulation of gene expression level. Default is 0.05.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell. Default is None.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -668,30 +728,36 @@
 <span class="sd">        List of modules that define the behavior of the cell.</span>
 <span class="sd">    history : list</span>
 <span class="sd">        List of historical values for the cell.</span>
+<span class="sd">    input_data_func : function, optional</span>
+<span class="sd">        A function to generate input data for the cell.</span>
 <span class="sd">    gene_expression_level : float</span>
 <span class="sd">        The gene expression level of the cell.</span>
+<span class="sd">    regulation_variance : float</span>
+<span class="sd">        The maximum variance in the regulation of gene expression level.</span>
 
 <span class="sd">    Methods</span>
 <span class="sd">    -------</span>
 <span class="sd">    update()</span>
 <span class="sd">        Update the cell&#39;s state.</span>
+<span class="sd">    get_history()</span>
+<span class="sd">        Get the historical values of the cell.</span>
+<span class="sd">    get_input_data()</span>
+<span class="sd">        Get the input data for the cell.</span>
 <span class="sd">    regulate_genes(regulation_factor)</span>
 <span class="sd">        Regulate the cell&#39;s gene expression level by a specified factor.</span>
+<span class="sd">    get_gene_expression_level()</span>
+<span class="sd">        Get the gene expression level of the cell.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">gene_expression_level</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">gene_expression_level</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">regulation_variance</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">input_data_func</span><span class="o">=</span><span class="n">input_data_func</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gene_expression_level</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gene_expression_level</span> <span class="o">=</span> <span class="n">gene_expression_level</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regulation_variance</span> <span class="o">=</span> <span class="n">regulation_variance</span>
 
 <div class="viewcode-block" id="GeneRegulationCell.update">
 <a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GeneRegulationCell.update">[docs]</a>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">historical_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update the cell&#39;s state based on its gene expression level.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        historical_value : any, optional</span>
-<span class="sd">            The historical value to append to the cell&#39;s history. Default is None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gene_expression_level</span><span class="p">)</span></div>
 
@@ -707,7 +773,22 @@
 <span class="sd">        regulation_factor : float</span>
 <span class="sd">            The factor by which to regulate the gene expression level.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gene_expression_level</span> <span class="o">*=</span> <span class="n">regulation_factor</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gene_expression_level</span> <span class="o">*=</span> <span class="n">regulation_factor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gene_expression_level</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">regulation_variance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">regulation_variance</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GeneRegulationCell.get_gene_expression_level">
+<a class="viewcode-back" href="../../pyorganoid.html#pyorganoid.cells.GeneRegulationCell.get_gene_expression_level">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_gene_expression_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the gene expression level of the cell.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The gene expression level of the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gene_expression_level</span></div>
 </div>
 
 </pre></div>
