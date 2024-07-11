@@ -99,7 +99,7 @@ jobs:
     - name: Publish to Conda
       if: steps.conda_version_check.outputs.exists == 'false'
       env:
-        ANACONDA_API_TOKEN: ${{ secrets.CONDA_API_TOKEN }}
+        ANACONDA_API_TOKEN: ${{ secrets.CONDA_TOKEN }}
       run: |
         source $(conda info --base)/etc/profile.d/conda.sh
         conda activate base
