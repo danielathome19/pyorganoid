@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="https://github.com/danielathome19/pyorganoid/blob/main/.github/images/logo_hero.png?raw=true" width="400" alt="Pyorganoid Logo" style="max-width:100%;">
+    <img src="https://github.com/danielathome19/pyorganoid/blob/main/.github/images/logo_hero.png?raw=true" width="400" alt="PyOrganoid Logo" style="max-width:100%;">
 </h1>
 
 [![PyPI Downloads](https://img.shields.io/pypi/dm/pyorganoid.svg?label=PyPI%20downloads)](
@@ -12,7 +12,7 @@ https://anaconda.org/danielathome19/pyorganoid)
 https://DOI_LINK_HERE)-->
 
 
-Pyorganoid is the world's first<sup>*</sup> Python package for the simulation of organoids for the purpose of studying 
+PyOrganoid is the world's first<sup>*</sup> Python package for the simulation of organoids for the purpose of studying 
 Organoid Intelligence (OI) and Organoid Learning (OL).
 It is designed to be simple to use and easy to extend with support for standard machine
 learning libraries such as TensorFlow, PyTorch, and Scikit-Learn (as well as ONNX-format models).
@@ -32,7 +32,7 @@ It provides:
 - numerous simulation environments and scheduling algorithms
 - TODO: *support for parallel/distributed computing, bio/cheminformatics libraries, logging, and more*
 
-Pyorganoid is currently in development and may not yet be ready for production use. We are actively seeking contributors
+PyOrganoid is currently in development and may not yet be ready for production use. We are actively seeking contributors
 to help us improve the package and expand its capabilities. If you are interested in contributing, please see our
 [contributing guide](CONTRIBUTING.md).
 
@@ -47,7 +47,7 @@ to help us improve the package and expand its capabilities. If you are intereste
 
 ### Pip
 
-Pyorganoid can be installed (without built-in support for machine learning libraries) using `pip`:
+PyOrganoid can be installed (without built-in support for machine learning libraries) using `pip`:
 
 ```bash
 pip install pyorganoid
@@ -71,7 +71,7 @@ pip install pyorganoid[onnx]
 
 ### Conda
 
-Pyorganoid can also be installed using `conda`:
+PyOrganoid can also be installed using `conda`:
 
 ```bash
 conda install -c danielathome19 pyorganoid
@@ -95,7 +95,7 @@ conda install -c danielathome19 pyorganoid-onnx
 
 ## Quickstart
 
-For a quick introduction to Pyorganoid, see the [Spiking Neuron Test](tests/test_spiking.py) in the `test` directory.
+For a quick introduction to PyOrganoid, see the [Spiking Neuron Test](tests/test_spiking.py) in the `test` directory.
 This test demonstrates the creation of a simple spiking neuron organoid running a binary classification Multi-Layer
 Perceptron (MLP) model using TensorFlow.
 
@@ -125,6 +125,6 @@ the [Immune Response Organoid Test (ONNX)](tests/test_immune.py), respectively.
 
 ## License
 
-Pyorganoid is licensed under the BSD-3 License. See the [LICENSE](LICENSE.md) file for more information.
+PyOrganoid is licensed under the BSD-3 License. See the [LICENSE](LICENSE.md) file for more information.
 
 <!-- Project development began July 6th, 2024. -->
