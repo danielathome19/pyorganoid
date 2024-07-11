@@ -99,13 +99,11 @@ jobs:
     - name: Publish to Conda
       if: steps.conda_version_check.outputs.exists == 'false'
       env:
-        ANACONDA_USER: ${{ secrets.CONDA_USERNAME }}
-        ANACONDA_PASSWORD: ${{ secrets.CONDA_PASSWORD }}
+        ANACONDA_API_TOKEN: ${{ secrets.CONDA_API_TOKEN }}
       run: |
         source $(conda info --base)/etc/profile.d/conda.sh
         conda activate base
-        anaconda login --username $ANACONDA_USER --password $ANACONDA_PASSWORD
-        anaconda upload build_output/**/pyorganoid-*.tar.bz2 --force
+        anaconda -t $ANACONDA_API_TOKEN upload build_output/**/pyorganoid-*.tar.bz2 --force
 
     - name: Build documentation
       if: success()
