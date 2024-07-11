@@ -72,13 +72,14 @@ jobs:
       if: success()
       run: |
         conda install -y conda-build anaconda-client
-        conda init bash
-        source ~/.bashrc
 
     - name: Build Conda package
       if: success()
+      shell: bash -l {0}
       run: |
         conda config --set anaconda_upload no
+        source $(conda info --base)/etc/profile.d/conda.sh
+        conda activate base
         conda-build . --output-folder build_output
 
     - name: Publish to Conda
@@ -87,6 +88,8 @@ jobs:
         ANACONDA_USER: ${{ secrets.CONDA_USERNAME }}
         ANACONDA_PASSWORD: ${{ secrets.CONDA_PASSWORD }}
       run: |
+        source $(conda info --base)/etc/profile.d/conda.sh
+        conda activate base
         anaconda login --username $ANACONDA_USER --password $ANACONDA_PASSWORD
         anaconda upload build_output/**/pyorganoid-*.tar.bz2 --force
 
