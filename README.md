@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src=".github/images/logo_hero.png" width="400" alt="Pyorganoid Logo" style="max-width:100%;">
+    <img src="https://github.com/danielathome19/pyorganoid/blob/main/.github/images/logo_hero.png?raw=true" width="400" alt="Pyorganoid Logo" style="max-width:100%;">
 </h1>
 
 [![PyPI Downloads](https://img.shields.io/pypi/dm/pyorganoid.svg?label=PyPI%20downloads)](
@@ -39,7 +39,7 @@ to help us improve the package and expand its capabilities. If you are intereste
 <p style="font-size: 6px"><sup>*</sup>As of July 6th, 2024, to the best of our knowledge :)</p>
 
 
-<img src=".github/images/spiking_organoid.png" style="width:100%;" align="center" alt="Organoid Example">
+<img src="https://github.com/danielathome19/pyorganoid/blob/main/.github/images/spiking_organoid.png?raw=true" style="width:100%;" align="center" alt="Organoid Example">
 
 
 ## Installation
@@ -107,18 +107,18 @@ the [Immune Response Organoid Test (ONNX)](tests/test_immune.py), respectively.
 <table style="width:100%;">
 <tr>
     <td>
-        <img src=".github/images/membrane_potential_simulation.png" style="width:100%;" align="center" alt="Spiking Organoid Example">
+        <img src="https://github.com/danielathome19/pyorganoid/blob/main/.github/images/membrane_potential_simulation.png?raw=true" style="width:100%;" align="center" alt="Spiking Organoid Example">
     </td>
     <td>
-        <img src=".github/images/volume_simulation.png" style="width:100%;" align="center" alt="Volumetric Organoid Example">    
+        <img src="https://github.com/danielathome19/pyorganoid/blob/main/.github/images/volume_simulation.png?raw=true" style="width:100%;" align="center" alt="Volumetric Organoid Example">    
     </td>
 </tr>
 <tr>
     <td>
-        <img src=".github/images/generegulation_simulation.png" style="width:100%;" align="center" alt="Gene Regulation Organoid Example">
+        <img src="https://github.com/danielathome19/pyorganoid/blob/main/.github/images/generegulation_simulation.png?raw=true" style="width:100%;" align="center" alt="Gene Regulation Organoid Example">
     </td>
     <td>
-        <img src=".github/images/immune_response_simulation.png" style="width:100%;" align="center" alt="Immune Response Organoid Example">    
+        <img src="https://github.com/danielathome19/pyorganoid/blob/main/.github/images/immune_response_simulation.png?raw=true" style="width:100%;" align="center" alt="Immune Response Organoid Example">    
     </td>
 </tr>
 </table>

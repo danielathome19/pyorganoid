@@ -53,10 +53,19 @@ jobs:
         miniforge-variant: Mambaforge
         python-version: 3.8
 
+    - name: Install conda dependencies
+      run: |
+        conda install conda-build anaconda-client
+
+    - name: Initialize Conda
+      shell: bash -l {0}
+      run: |
+        conda init bash
+        source ~/.bashrc
+
     - name: Build Conda package
       if: success()
       run: |
-        conda install conda-build anaconda-client
         conda config --set anaconda_upload no
         conda-build . --output-folder build_output
 
