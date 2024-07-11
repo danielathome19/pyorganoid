@@ -31,7 +31,6 @@ def main():
         environment = Environment(dimensions=3, size=50)
 
         # Initialize the organoid and add agents
-        input_shape = (10,)
         organoid = SpikingNeuronOrganoid(environment, ml_model, input_data_func=custom_input_data_func, num_cells=10)
         organoid.plot_organoid("spiking_organoid.png", show_properties=True, dpi=300)
 

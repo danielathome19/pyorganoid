@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 # Be sure to update the version number in both "setup.py" and "meta.yaml" files.
 setup(
     name='pyorganoid',
-    version='0.1.2',
+    version='0.1.3',
     packages=find_packages(),
     author='Daniel Szelogowski',
     description='A Python package for the simulation of organoids for the purpose of studying '

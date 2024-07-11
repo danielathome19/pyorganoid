@@ -103,6 +103,21 @@ If you prefer Scikit-Learn, PyTorch, or ONNX models, see the [Volumetric Organoi
 the [Gene Regulation Organoid Test (PyTorch)](tests/test_generegulation.py), or
 the [Immune Response Organoid Test (ONNX)](tests/test_immune.py), respectively.
 
+For example:
+```python
+import pyorganoid as po
+
+model = po.tf_module.TFModel("model.h5")
+env = po.environments.Environment()
+organoid = po.organoids.SpikingNeuronOrganoid(env, model, num_cells=50)
+organoid.plot_organoid(show_properties=True)
+
+scheduler = po.simulation.Scheduler(organoid)
+scheduler.simulate(steps=100)
+
+organoid.plot_simulation_history(title="Spiking Neuron Organoid Simulation", 
+                                 y_label="Membrane Potential (mV)", dpi=600)
+```
 
 <table style="width:100%;">
 <tr>
