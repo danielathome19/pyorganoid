@@ -77,20 +77,7 @@ PyOrganoid can also be installed using `conda`:
 conda install -c danielathome19 pyorganoid
 ```
 
-To include support for all machine learning libraries, use:
-
-```bash
-conda install -c danielathome19 pyorganoid-all
-```
-
-Or, to include support for a specific library (TensorFlow, PyTorch, Scikit-Learn, or ONNX), use:
-
-```bash
-conda install -c danielathome19 pyorganoid-tensorflow
-conda install -c danielathome19 pyorganoid-torch
-conda install -c danielathome19 pyorganoid-sklearn
-conda install -c danielathome19 pyorganoid-onnx
-```
+To include support for extras, use pip as described above.
 
 
 ## Quickstart
