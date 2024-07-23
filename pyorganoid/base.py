@@ -246,7 +246,7 @@ class Organoid:
 
             # Add environment; prepend "Base" to environment name if it is the base class
             env_name = type(self.environment).__name__
-            env_label = f'Environment: {"Base" + env_name if env_name == "Environment" else ""}' + (
+            env_label = f'Environment: {"Base" + env_name if env_name == "Environment" else env_name}' + (
                         f'\nDimensions: {self.environment.dimensions}\nSize: {self.environment.size}'
                         if show_properties else '')
             dot.node('env', env_label, shape='rectangle')
