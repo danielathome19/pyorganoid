@@ -140,7 +140,7 @@ If you use this code for your research, please cite this project as:
  author = {Szelogowski, Daniel},
  doi = {10.48550/arxiv.2407.18413},
  license = {BSD-3-Clause},
- month = jul,
+ month = {jul},
  title = {{pyorganoid: A Python package for the simulation of Organoid Intelligence (OI)/Organoid Learning (OL).}},
  url = {https://github.com/danielathome19/pyorganoid},
  version = {0.1.5},
@@ -154,7 +154,7 @@ or as the corresponding research paper:
 @misc{Szelogowski_Simulation_of_Neural_Responses_Using_OI_2024,
  author = {Szelogowski, Daniel},
  doi = {10.48550/arxiv.2407.18413},
- month = jul,
+ month = {jul},
  title = {{Simulation of Neural Responses to Classical Music Using Organoid Intelligence Methods}},
  url = {https://github.com/danielathome19/Pianoid-EEG-NN},
  year = {2024}
