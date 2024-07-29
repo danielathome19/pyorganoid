@@ -7,7 +7,7 @@ authors:
 title: "pyorganoid: A Python package for the simulation of Organoid Intelligence (OI)/Organoid Learning (OL)."
 type: software
 version: 1.0.0
-doi: TBA
+doi: 10.48550/arxiv.2407.18413
 license: BSD-3-Clause
 license-url: "https://github.com/danielathome19/pyorganoid/blob/master/LICENSE"
 date-released: 2024-07-06
