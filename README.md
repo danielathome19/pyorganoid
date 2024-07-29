@@ -130,3 +130,34 @@ organoid.plot_simulation_history(title="Spiking Neuron Organoid Simulation",
 PyOrganoid is licensed under the BSD-3 License. See the [LICENSE](LICENSE.md) file for more information.
 
 <!-- Project development began July 6th, 2024. -->
+
+
+## Citation
+
+If you use this code for your research, please cite this project as:
+
+```bibtex
+@software{Szelogowski_pyorganoid_2024,
+ author = {Szelogowski, Daniel},
+ doi = {10.48550/arxiv.2407.18413},
+ license = {BSD-3-Clause},
+ month = jul,
+ title = {{pyorganoid: A Python package for the simulation of Organoid Intelligence (OI)/Organoid Learning (OL).}},
+ url = {https://github.com/danielathome19/pyorganoid},
+ version = {0.1.5},
+ year = {2024}
+}
+```
+
+or as the corresponding research paper:
+
+```bibtex
+@misc{Szelogowski_Simulation_of_Neural_Responses_Using_OI_2024,
+ author = {Szelogowski, Daniel},
+ doi = {10.48550/arxiv.2407.18413},
+ month = jul,
+ title = {{Simulation of Neural Responses to Classical Music Using Organoid Intelligence Methods}},
+ url = {https://github.com/danielathome19/Pianoid-EEG-NN},
+ year = {2024}
+}
+```

@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-# Be sure to update the version number in both "setup.py" and "meta.yaml" files.
+# Be sure to update the version number in both "setup.py" and "meta.yaml" files, and the README and CITATION versions.
 setup(
     name='pyorganoid',
     version='0.1.5',

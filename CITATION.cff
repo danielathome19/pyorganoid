@@ -6,9 +6,9 @@ authors:
   orcid: "https://orcid.org/0000-0002-0350-5771"
 title: "pyorganoid: A Python package for the simulation of Organoid Intelligence (OI)/Organoid Learning (OL)."
 type: software
-version: 1.0.0
+version: 0.1.5
 doi: 10.48550/arxiv.2407.18413
 license: BSD-3-Clause
-license-url: "https://github.com/danielathome19/pyorganoid/blob/master/LICENSE"
+license-url: "https://github.com/danielathome19/pyorganoid/blob/main/LICENSE.md"
 date-released: 2024-07-06
 url: "https://github.com/danielathome19/pyorganoid"
