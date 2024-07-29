@@ -8,8 +8,7 @@ https://pypi.org/project/pyorganoid/)
 https://anaconda.org/danielathome19/pyorganoid)
 [![CI/CT/CD](https://github.com/danielathome19/pyorganoid/actions/workflows/package_upload.yml/badge.svg)](https://github.com/danielathome19/pyorganoid/actions/workflows/package_upload.yml)
 [![License](https://img.shields.io/badge/license-BSD_3_Clause-blue)](./LICENSE.md)
-<!--[![Research Paper](https://img.shields.io/badge/DOI-10)](
-https://DOI_LINK_HERE)-->
+[![DOI](https://zenodo.org/badge/DOI/10.48550/arxiv.2407.18413.svg)](https://doi.org/10.48550/arxiv.2407.18413)
 
 
 PyOrganoid is the world's first<sup>*</sup> Python package for the simulation of organoids for the purpose of studying 
